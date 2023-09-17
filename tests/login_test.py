@@ -1,8 +1,8 @@
-from components.login import login_existing_account, create_new_account, accounts
+from components.login import login_existing_account, create_new_account
 import pandas as pd
 
 def test_success_messsage_when_log_in_successful(monkeypatch, capfd):
-    inputs = iter(['minhuchiha', 'P@ssword1'])
+    inputs = iter(['minhuchiha', 'P@ssword1', ''])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     login_existing_account()
 
@@ -12,7 +12,7 @@ def test_success_messsage_when_log_in_successful(monkeypatch, capfd):
     assert True
 
 def test_failure_messsage_when_log_in_failed(monkeypatch, capfd):
-    inputs = iter(['minhuchiha', 'P@ssword1'])
+    inputs = iter(['minhuchiha', 'P@ssword1', ''])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     login_existing_account()
 
@@ -22,7 +22,7 @@ def test_failure_messsage_when_log_in_failed(monkeypatch, capfd):
     assert True
     
 def test_stop_when_log_in_attempts_exceeded(monkeypatch, capfd):
-    inputs = iter(['minhuchiha', 'P@ssword1'])
+    inputs = iter(['minhuchiha', 'P@ssword1', ''])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     create_new_account()
 
