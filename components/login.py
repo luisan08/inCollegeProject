@@ -9,12 +9,6 @@ def login_existing_account():
     while True:
         username = input("Please enter your username: ")
         password = input("Please enter your password: ")
-        # for u, p in zip(accounts['username'], accounts['password']):
-        #     if username == u and password == p:
-        #         print("You have successfully logged in!")
-        #         return False
-        #     else:
-        #         print("Incorrect username or password. Please try again!")
         if (username, password) in zip(accounts['username'], accounts['password']):
             print("You have successfully logged in!")
             return False
