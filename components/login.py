@@ -45,7 +45,8 @@ def exceeded_login_attempts(attempts = 5):
 
 def create_new_account():
     """Function for creating a new account."""
-    global accounts
+    global accounts 
+    print(len(accounts))
     if exceeded_login_attempts():
         print("All permitted accounts have been created, please come back later.")
         return
