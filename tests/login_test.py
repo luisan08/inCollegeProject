@@ -4,7 +4,7 @@ import pandas as pd
 
 @patch('components.login.accounts', pd.DataFrame({'username': ['minhuchiha', 'sdaffew'], 'password': ['P@ssword1', '1232sfs@Asd']}))
 def test_success_messsage_when_log_in_successful(monkeypatch, capfd):
-    inputs = iter(['minhuchiha', 'P@ssword1', ''])
+    inputs = iter(['minhuchiha', 'P@ssword1'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     login_existing_account()
     out, _ = capfd.readouterr()
@@ -13,7 +13,7 @@ def test_success_messsage_when_log_in_successful(monkeypatch, capfd):
 
 @patch('components.login.accounts', pd.DataFrame({'username': ['minhuchiha', 'sdaffew'], 'password': ['P@ssword2', '1232sfs@Asd']}))
 def test_failure_messsage_when_log_in_failed(monkeypatch, capfd):
-    inputs = iter(['minhuchiha', 'P@ssword1', ''])
+    inputs = iter(['minhuchiha', 'P@ssword1'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
     out = ""
     try:
