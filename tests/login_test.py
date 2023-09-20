@@ -1,4 +1,3 @@
-import components.login 
 from components.login import login_existing_account, create_new_account
 from unittest.mock import patch
 import pandas as pd
