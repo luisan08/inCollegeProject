@@ -51,7 +51,7 @@ def exceeded_login_attempts(attempts = 5):
 def create_new_account():
     """Function for creating a new account."""
     global accounts 
-    print(len(accounts))
+
     if exceeded_login_attempts():
         print("All permitted accounts have been created, please come back later.")
         return
@@ -80,11 +80,13 @@ def login():
     print("1. Create a new account")
     print("2. Login to existing account")
     option = input("Please select an option by entering a number: ")
+    while option != "1" and option != "2":
+        print("Invalid option. Please try again.")
+        print("1. Create a new account")
+        print("2. Login to existing account")
+        option = input("Please select an option by entering a number: ")
     if option == "1":
         create_new_account()
     elif option == "2":
         login_existing_account()
-    else:
-        print("Invalid option. Please try again.")
-        login()
 
