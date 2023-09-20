@@ -4,6 +4,17 @@ import pandas as pd
 """Store accounts in a csv file. Each row contains a username and password."""
 accounts = pd.read_csv('components/accounts.csv')
 
+def in_InCollege_System():
+    """Function for checking if user is in the InCollege system."""
+    first = input("Please enter your first name: ")
+    last = input("Please enter your last name: ")
+    if (first, last) in zip(accounts['first'], accounts['last']):
+        print("\nWelcome back, " + first + " " + last + "! You are part of the InCollege system.\n")
+        return True
+    else:
+        print("\nYou are not yet a part of the InCollege system yet.\n")
+        return False
+
 def login_existing_account():
     """Function for logging into an existing account."""
     while True:
@@ -54,8 +65,9 @@ def create_new_account():
     password = input("Please enter your password: ")
     while not validate_password(password):
         password = input("Please enter your password: ")
-
-    newAccount = {'username': username, 'password': password}
+    first = input("Please enter your first name: ")
+    last = input("Please enter your last name: ")
+    newAccount = {'username': username, 'password': password, 'first': first, 'last': last}
     
     newAccount = pd.DataFrame(newAccount, index=[0])
     accounts = pd.concat([accounts, newAccount], ignore_index=True)
@@ -64,6 +76,7 @@ def create_new_account():
 
 def login():
     """Main login function."""
+    in_InCollege_System()
     print("1. Create a new account")
     print("2. Login to existing account")
     option = input("Please select an option by entering a number: ")
