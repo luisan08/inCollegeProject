@@ -1,6 +1,6 @@
 import pandas as pd
 from components.login import login
-
+from components.config import Config
 accounts = pd.read_csv('components/accounts.csv')
 accounts_jobs = pd.read_csv('components/accounts_jobs.csv')
 
@@ -34,13 +34,15 @@ def jobSearch():
             jobEmployer = input("Employer: ")
             jobLocation = input("Location: ")
             jobSalary = input("Salary: ")
-
+            account = Config.SYSTEM_ACCOUNT
             jobPosting = {
                 'Title': [jobTitle],
                 'Description': [jobDescription],
                 'Employer': [jobEmployer],
                 'Location': [jobLocation],
-                'Salary': [jobSalary]
+                'Salary': [jobSalary],
+                'username': account[0],
+                'password': account[1]
             }
 
             jobPosting = pd.DataFrame(jobPosting, index=[0])

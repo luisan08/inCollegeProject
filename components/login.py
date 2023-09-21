@@ -1,4 +1,5 @@
 import pandas as pd
+from components.config import Config
 """This module contains functions for logging in to an existing account or creating a new account."""
 
 """Store accounts in a csv file. Each row contains a username and password."""
@@ -22,6 +23,7 @@ def login_existing_account():
         password = input("Please enter your password: ")
         if (username, password) in zip(accounts['username'], accounts['password']):
             print("You have successfully logged in!")
+            Config.SYSTEM_ACCOUNT = (username, password)
             return False
         else:
             print("Incorrect username or password. Please try again!")
