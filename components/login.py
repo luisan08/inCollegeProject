@@ -9,10 +9,10 @@ def in_InCollege_System():
     first = input("Please enter your first name: ")
     last = input("Please enter your last name: ")
     if (first, last) in zip(accounts['first'], accounts['last']):
-        print("\nWelcome back, " + first + " " + last + "! You are part of the InCollege system.\n")
+        print("\nThey are part of the InCollege system.\n")
         return True
     else:
-        print("\nYou are not yet a part of the InCollege system yet.\n")
+        print("\nThey are not yet a part of the InCollege system yet.\n")
         return False
 
 def login_existing_account():
