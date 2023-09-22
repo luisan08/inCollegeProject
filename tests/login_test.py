@@ -32,4 +32,21 @@ def test_stop_when_log_in_attempts_exceeded(monkeypatch, capfd):
     out, _ = capfd.readouterr()
 
     assert "All permitted accounts have been created, please come back later." in out
-    
+
+@patch('components.login.accounts', pd.DataFrame({'first': ['Nihar', 'Tom'], 'last': ['Patel', 'Cruise']}))
+def test_user_in_InCollege(monkeypatch, capfd):
+    inputs = iter(['Nihar', 'Patel'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+    in_InCollege_System()
+    out, _ = capfd.readouterr()
+
+    assert "Welcome back, Nihar Patel! You are part of the InCollege system." in out
+
+@patch('components.login.accounts', pd.DataFrame({'first': ['Nitin', 'James'], 'last': ['Pandey', 'Anderson']}))
+def test_user_not_in_InCollege(monkeypatch, capfd):
+    inputs = iter(['Nihar', 'Patel'])
+    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+    in_InCollege_System()
+    out, _ = capfd.readouterr()
+
+    assert "You are not yet a part of the InCollege system yet." in out
