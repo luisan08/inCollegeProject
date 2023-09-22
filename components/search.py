@@ -1,12 +1,101 @@
+import pandas as pd
+from components.login import login
+from components.config import Config
+accounts = pd.read_csv('components/accounts.csv')
+accounts_jobs = pd.read_csv('components/accounts_jobs.csv')
+
+
 #jobSearch allows user to search for jobs
-def jobSearch(): 
-    print("Under construction.")
-    return
+def jobPosting_attempts(attempts = 5):
+    return len(accounts_jobs) >= attempts
+
+def jobSearch():
+
+    global accounts 
+    global accounts_jobs
+
+    while True:
+        print("Welcome to the Job Search! Choose a number for the options below")
+        print("1. Post a Job")
+        print("2. Return to Job Search")
+
+        
+        option = int(input("Select your option:"))
+
+        if option == 1:
+
+            if jobPosting_attempts():
+                print("All permitted jobs have been created, please come back later.")
+                continue
+
+            print("Enter the information for the job you would like to post!")
+            jobTitle = input("Title: ")
+            jobDescription = input("Description: ")
+            jobEmployer = input("Employer: ")
+            jobLocation = input("Location: ")
+            jobSalary = input("Salary: ")
+
+            account = Config.SYSTEM_ACCOUNT
+
+            jobPosting = {
+                'Title': [jobTitle],
+                'Description': [jobDescription],
+                'Employer': [jobEmployer],
+                'Location': [jobLocation],
+                'Salary': [jobSalary],
+                'First': account[0],
+                'Last': account[1]
+            }
+
+            jobPosting = pd.DataFrame(jobPosting, index=[0])
+            accounts_jobs = pd.concat([accounts_jobs, jobPosting], ignore_index=True)
+            accounts_jobs.to_csv('components/accounts_jobs.csv', index=False)
+            
+            print("You have successfully posted a job!")    
+            print("\n")
+
+        elif option == 2:
+            print("Returning to Job Search.")
+            break
+
+        else:
+            print("Invalid option. Please try again.")
+
+
+
 
 #jobSearch allows people to find people they know
 def peopleSearch():
-    print("Under construction.")
-    return
+
+    global accounts 
+    while True:
+        print("Find people you know! Choose a number for the options below")
+        print("1. Search for people ")
+        print("2. Return to People Search")
+        option = int(input("Select your option:"))
+    
+
+        if(option == 1):
+
+            first = input("Enter the first name: ")
+            last = input("Enter the last name: ")
+     
+            if (first, last) in zip(accounts['first'], accounts['last']):
+                print("Would you like to connect with", first, last, "?")
+            else:
+                print("Username was not found.")
+                print("\n")
+        
+
+        elif option == 2:
+            print("Returning to People Search.")
+            break 
+
+        else:
+            print("Invalid option. Returning to People Search.") 
+
+
+
 
 #skillSearch allows users to choose to learn a skill from a list
 def skillSearch():
