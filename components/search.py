@@ -34,15 +34,17 @@ def jobSearch():
             jobEmployer = input("Employer: ")
             jobLocation = input("Location: ")
             jobSalary = input("Salary: ")
+
             account = Config.SYSTEM_ACCOUNT
+
             jobPosting = {
                 'Title': [jobTitle],
                 'Description': [jobDescription],
                 'Employer': [jobEmployer],
                 'Location': [jobLocation],
                 'Salary': [jobSalary],
-                'username': account[0],
-                'password': account[1]
+                'First': account[0],
+                'Last': account[1]
             }
 
             jobPosting = pd.DataFrame(jobPosting, index=[0])
