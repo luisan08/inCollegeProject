@@ -1,5 +1,10 @@
-from components.search import jobSearch, peopleSearch, skillSearch
+from unittest import mock
 import pytest
+import components.search
+from components.search import jobSearch, peopleSearch, skillSearch, jobPosting_attempts
+from unittest.mock import patch
+import pandas as pd
+from io import StringIO
 
 @pytest.mark.parametrize("skillChoice",[1, 2, 3, 4, 5])
 def test_skill_search(skillChoice, monkeypatch, capfd):
