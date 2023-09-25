@@ -10,15 +10,13 @@ def in_InCollege_System():
     first = input("Please enter your first name: ")
     last = input("Please enter your last name: ")
     if (first, last) in zip(accounts['first'], accounts['last']):
-        print("\nThey are part of the InCollege system.\n")
+        print("\nWelcome back, " + first + " " + last + "! You are part of the InCollege system.\n")
         return True
     else:
-        print("\nThey are not yet a part of the InCollege system yet.\n")
+        print("\nYou are not yet a part of the InCollege system yet.\n")
         return False
 
-#helper function to get the first name and last name from the logged in username
-def get_first_last_name(username, password):
-   
+def get_first_last_name(username, password):  
     account_row = accounts[(accounts['username'] == username) & (accounts['password'] == password)]
     if not account_row.empty:
         first_name = account_row['first'].values[0]
@@ -26,7 +24,6 @@ def get_first_last_name(username, password):
         return first_name, last_name
     else:
         return None, None
-
 
 def login_existing_account():
     """Function for logging into an existing account."""
@@ -83,8 +80,7 @@ def create_new_account():
     first = input("Please enter your first name: ")
     last = input("Please enter your last name: ")
     newAccount = {'username': username, 'password': password, 'first': first, 'last': last}
-    Config.SYSTEM_ACCOUNT = (first, last)
-
+    
     newAccount = pd.DataFrame(newAccount, index=[0])
     accounts = pd.concat([accounts, newAccount], ignore_index=True)
     accounts.to_csv('components/accounts.csv', index=False)
@@ -105,4 +101,3 @@ def login():
         create_new_account()
     elif option == "2":
         login_existing_account()
-
