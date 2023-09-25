@@ -1,9 +1,8 @@
 import pandas as pd
-from components.login import login
 from components.config import Config
+
 accounts = pd.read_csv('components/accounts.csv')
 accounts_jobs = pd.read_csv('components/accounts_jobs.csv')
-
 
 #jobSearch allows user to search for jobs
 def jobPosting_attempts(attempts = 5):
@@ -18,7 +17,6 @@ def jobSearch():
         print("Welcome to the Job Search! Choose a number for the options below")
         print("1. Post a Job")
         print("2. Return to Job Search")
-
         
         option = int(input("Select your option:"))
 
@@ -35,7 +33,7 @@ def jobSearch():
             jobLocation = input("Location: ")
             jobSalary = input("Salary: ")
 
-            account = Config.SYSTEM_ACCOUNT
+            account = Config.SYSTEM_ACCOUNT or ['Default First Name', 'Default Last Name']
 
             jobPosting = {
                 'Title': [jobTitle],
@@ -61,10 +59,7 @@ def jobSearch():
         else:
             print("Invalid option. Please try again.")
 
-
-
-
-#jobSearch allows people to find people they know
+#peopleSearch allows people to find people they know
 def peopleSearch():
 
     global accounts 
@@ -74,7 +69,6 @@ def peopleSearch():
         print("2. Return to People Search")
         option = int(input("Select your option:"))
     
-
         if(option == 1):
 
             first = input("Enter the first name: ")
@@ -86,15 +80,12 @@ def peopleSearch():
                 print("Username was not found.")
                 print("\n")
         
-
         elif option == 2:
             print("Returning to People Search.")
             break 
 
         else:
             print("Invalid option. Returning to People Search.") 
-
-
 
 
 #skillSearch allows users to choose to learn a skill from a list
@@ -150,7 +141,3 @@ def search():
             searchChoice = int(input("Invalid choice. Please input a number corresponding with your desired search.\n"))
     return
         
-
-
-   
-    
