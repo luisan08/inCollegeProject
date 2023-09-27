@@ -121,7 +121,7 @@ def skillSearch():
         
 # search is the main search function where other searches can be selected
 def search(): 
-    print("Search Options:\n1. Look for Jobs\n2. Find People You Know\n3. Learn a Skill\n4. Quit Search")
+    print("\nSearch Options:\n1. Look for Jobs\n2. Find People You Know\n3. Learn a Skill\n4. Quit Search")
     searchChoice = int(input("Please enter your desired search: "))
 
     while True: #input validation

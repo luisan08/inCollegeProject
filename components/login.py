@@ -1,5 +1,7 @@
 import pandas as pd
 from components.config import Config
+
+
 """This module contains functions for logging in to an existing account or creating a new account."""
 
 """Store accounts in a csv file. Each row contains a username and password."""
@@ -87,10 +89,11 @@ def create_new_account():
     print("You have successfully created an account!")
 
 def login():
-    """Main login function."""
-    in_InCollege_System()
+    """Login function."""
+
     print("1. Create a new account")
     print("2. Login to existing account")
+    
     option = input("Please select an option by entering a number: ")
     while option != "1" and option != "2":
         print("Invalid option. Please try again.")
