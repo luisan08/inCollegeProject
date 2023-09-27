@@ -5,11 +5,15 @@ from components.search import search
 from components.menu import general_menu
 
 
+
 def main():
+
     welcome()
     home_screen()
     in_InCollege_System()
     general_menu()
+    
+    #if they are logged in, then run search()
     search()
 
 
