@@ -94,7 +94,7 @@ def create_new_account():
     print("You have successfully created an account!")
 
 def login():
-    """Second login function."""
+    """Login function."""
 
     print("1. Create a new account")
     print("2. Login to existing account")
@@ -109,9 +109,4 @@ def login():
         create_new_account()
     elif option == "2":
         login_existing_account()
-
-
-
-
-
-
+        
