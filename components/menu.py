@@ -1,5 +1,3 @@
-import pandas as pd
-from components.config import Config
 import components.login as login
 
 #function to print the first set of useful links
