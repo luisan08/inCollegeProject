@@ -18,7 +18,6 @@ def in_InCollege_System():
         print("\nYou are not yet a part of the InCollege system yet.\n")
         return False
 
-
 def get_first_last_name(username, password):  
     account_row = accounts[(accounts['username'] == username) & (accounts['password'] == password)]
     if not account_row.empty:
