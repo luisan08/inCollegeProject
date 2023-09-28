@@ -3,6 +3,7 @@ from components.home_screen import home_screen
 from components.login import in_InCollege_System
 from components.search import search
 from components.menu import general_menu
+from components.config import Config
 
 
 
@@ -12,9 +13,9 @@ def main():
     home_screen()
     in_InCollege_System()
     general_menu()
-    
-    #if they are logged in, then run search()
-    search()
+
+    if Config.FLAG == 1:
+        search()
 
 
 if __name__ == "__main__":

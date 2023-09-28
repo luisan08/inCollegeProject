@@ -1,7 +1,9 @@
-import components.login as login
+import pandas as pd
 from components.config import Config
+import components.login as login
 
 
+accounts = pd.read_csv('components/accounts.csv')
 
 
 #function to print the first set of useful links
@@ -26,7 +28,7 @@ def display_general_links():
     print("8. Go Back to Previous Menu")
 
 #general links for when user is logged in
-def display_login():
+def display_general_links_login():
     print("\nGeneral Links:")
     print("1. Help Center")
     print("2. About")
@@ -60,7 +62,7 @@ def general_link_selection(choice):
 
 
 #helper function to help handle the links within "General"
-def general_login(choice):
+def general_link_selection_login(choice):
 
     if choice == 1:
         print("\nWe're here to help")
@@ -82,24 +84,18 @@ def general_login(choice):
 def general_menu():
     while True:
             
+            if Config.FLAG == 1:
+                #option after they are logged in
                 display_useful_links()
-
                 choice = int(input("Select an option: "))
 
                 if choice == 1:
                     while True:
-                        if Config.FLAG == 1:
-                            display_login()
-                            general_choice = int(input("Select an option: "))
-                            if general_choice == 7:
-                                break
-                            general_login(general_choice)
-                        else:
-                            display_general_links()
-                            general_choice = int(input("Select an option: "))
-                            if general_choice == 8:
-                                break
-                            general_link_selection(general_choice)
+                        display_general_links_login()
+                        general_choice = int(input("Select an option: "))
+                        if general_choice == 7:
+                            break
+                        general_link_selection_login(general_choice)
 
                 elif choice == 2 or choice == 3 or choice == 4:
                     print("\nUnder construction")
@@ -108,7 +104,32 @@ def general_menu():
                     break
 
                 else:
-                    print("\nInvalid choice. Please try again.") 
+                    print("\nInvalid choice. Please try again.")
+            
+
+            else:
+
+                display_useful_links()
+
+                choice = int(input("Select an option: "))
+
+                if choice == 1:
+                    while True:
+                        display_general_links()
+                        general_choice = int(input("Select an option: "))
+                        if general_choice == 8:
+                            break
+                        general_link_selection(general_choice)
+
+                elif choice == 2 or choice == 3 or choice == 4:
+                    print("\nUnder construction")
+
+                elif choice == 5:
+                    break
+
+                else:
+                    print("\nInvalid choice. Please try again.")
+
 
 
 
