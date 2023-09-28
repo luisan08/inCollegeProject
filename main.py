@@ -13,8 +13,7 @@ def main():
     home_screen()
     in_InCollege_System()
     general_menu()
-
-    if Config.FLAG == 1:
+    if Config.FLAG == True:
         search()
 
 
