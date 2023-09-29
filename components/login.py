@@ -36,6 +36,7 @@ def login_existing_account():
             print("You have successfully logged in!")
             first_name, last_name =  get_first_last_name(username, password)
             Config.SYSTEM_ACCOUNT = (first_name, last_name)
+            Config.FLAG = True
             return False
         else:
             print("Incorrect username or password. Please try again!")
@@ -104,3 +105,5 @@ def login():
         create_new_account()
     elif option == "2":
         login_existing_account()
+        
+

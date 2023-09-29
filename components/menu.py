@@ -1,4 +1,5 @@
 import components.login as login
+from components.config import Config
 
 #function to print 2 groups of links
 def display_groups_of_links():
@@ -30,9 +31,12 @@ def display_inCollege_important_link():
     print("10. Go Back to Previous Menu")
 
 #function to print the links within "General"
-def display_general_links():
+def display_general_links(isLogin = False):
     print("\nGeneral Links:")
-    print("1. Sign Up")
+    if not isLogin:
+        print("1. Sign Up")
+    else:
+        print("1. Sign Out")
     print("2. Help Center")
     print("3. About")
     print("4. Press")
@@ -42,12 +46,13 @@ def display_general_links():
     print("8. Go Back to Previous Menu")
 
 #helper function to help handle the links within "General"
-def general_link_selection(choice):
-    if choice == 1:
+def general_link_selection(choice, isLogin = False):
+    if choice == 1 and not isLogin:
         print("Redirecting to Sign Up / Login page")
         print()
-        #calling login() function
         login.login()
+    elif choice == 1 and isLogin:
+        print("Redirecting to Sign Up page")
     elif choice == 2:
         print("\nWe're here to help")
     elif choice == 3:
@@ -67,14 +72,15 @@ def general_link_selection(choice):
 def useful_links_user_selection():
     while True:
         display_useful_links()
+
         choice = int(input("Select an option: "))
         if choice == 1:
             while True:
-                display_general_links()
+                display_general_links(Config.FLAG)
                 general_choice = int(input("Select an option: "))
                 if general_choice == 8:
                     break
-                general_link_selection(general_choice)
+                general_link_selection(general_choice, Config.FLAG)
 
         elif choice == 2 or choice == 3 or choice == 4:
             print("\nUnder construction")
@@ -84,7 +90,8 @@ def useful_links_user_selection():
             break
 
         else:
-            print("\nInvalid choice. Please try again.")
+            print("\nInvalid choice. Please try again.") 
+
 
 #function to handle language option
 def language_option():
