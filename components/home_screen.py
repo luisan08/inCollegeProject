@@ -1,3 +1,5 @@
+from components.login import in_InCollege_System
+
 def home_screen():
     print( 
             """
@@ -12,8 +14,29 @@ Ashkan describes having grown immensely from his work with professors here at th
 Once Lisa understood Ashkan’s interest, she and a colleague in the Union Administrative Office began brainstorming possible job opportunities with the Union over the summer.\n It turned out that the Union actually needed the services of a multi-media producer and hired Ashkan to compile digital images and make music for videos.\n The job gave Ashkan a great opportunity to apply his knowledge of art and technology in a commercial way. In his words, “Most of the time in art school, projects are just for the sake of art, but this job required me to apply my skills and talent to a real life project.\
 If Ashkan were to give advice to other students, he would tell them, “Don’t be hesitant about acknowledging the skills you have. Maybe you will be able to find something that you will be good at and even create a job position that benefits both you and your employer!""")
     print()
-    choice = input("Would you like to play a video we made for you? (y/n): ")
-    if choice == "y":
-        print("\nVideo is now playing\n")
-    else:
-        print("That's ok, you can watch it later.")
+
+
+    while True:
+
+        print("\nNavigation")
+        print("1. Watch a Video")
+        print("2. Find Friends in the InCollege System")
+        print("3. Continue with Menu")
+        
+        option = int(input("Select an option: "))
+
+        if option == 1:
+            choice = input("Would you like to play a video we made for you? (y/n): ")
+            if choice == "y":
+                print("\nVideo is now playing\n")
+            else:
+                print("That's ok, you can watch it later.")
+
+        elif option == 2:
+            in_InCollege_System()
+
+        elif option == 3:
+            break 
+
+        else:
+            print("Invalid option. Try again.")

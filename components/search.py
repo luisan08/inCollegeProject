@@ -1,5 +1,6 @@
 import pandas as pd
 from components.config import Config
+from components.menu import general_menu
 
 accounts = pd.read_csv('components/accounts.csv')
 accounts_jobs = pd.read_csv('components/accounts_jobs.csv')
@@ -135,6 +136,7 @@ def search():
             skillSearch()
             break
         elif searchChoice == 4: # quit search
+            general_menu()
             break
         else: 
             # user can only enter valid option

@@ -1,9 +1,10 @@
 import components.login as login
 from components.config import Config
+from components.home_screen import home_screen
 
 #function to print 2 groups of links
 def display_groups_of_links():
-    print("1. Useful Links")
+    print("\n1. Useful Links")
     print("2. InCollege Important Links:")
     print("3. Exit menu")
 
@@ -174,7 +175,10 @@ def general_menu():
             incollege_important_links_user_selection()
         elif choice == 3:
             # Exit menu
-            break
+            if Config.FLAG != True:
+                home_screen()
+            else:
+                break
         else:
             print("Invalid choice. Please try again.")
         
