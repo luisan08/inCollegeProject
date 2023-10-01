@@ -139,7 +139,7 @@ def incollege_important_links_user_selection():
         elif choice == 2:
             print("InCollege is an online tool that will be designed exclusively for college students. The platform allows student at different universities to connect, exchange information, and talk with each other. Students will use this tool while they are in college and then transition to LinkedIn once they get a job and leave school")
         elif choice == 3:
-            print("Accessiblity")
+            print("Accessiblity, Acquire knowledge of and abide by WCAG 2.1, the Web Content Accessibility Guidelines.")
         elif choice == 4:
             print("By using this website, you agree that your data will be collected for recruiting purposes")
         elif choice == 5:
