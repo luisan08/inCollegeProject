@@ -1,6 +1,10 @@
 import components.login as login
 from components.config import Config
 from components.home_screen import home_screen
+import pandas as pd
+
+accounts = pd.read_csv('components/accounts.csv')
+accounts_controls = pd.read_csv('components/accounts_controls.csv')
 
 #function to print 2 groups of links
 def display_groups_of_links():
@@ -96,37 +100,80 @@ def useful_links_user_selection():
 
 #function to handle language option
 def language_option():
+    global language_setting
+    
     while True:
-        print("1. English")
-        print("2. Spanish")
-        choice = int(input("Select an option to change the language:\n"))
-        if choice == 1:
-            print("English was chosen")
+        #if user is not logged in
+        if Config.FLAG == False:
+            print("Language controls can only be modified by signed-in users.")
             break
-        elif choice == 2:
-            print("Spanish was chosen")
-            break
-        else:
-            print("Invalid choice! Please select again.")
+        else: 
+            print("1. English")
+            print("2. Spanish")
+            choice = int(input("Select an option to change the language:\n"))
+            if choice == 1:
+                print("English was chosen")
+
+                language_setting = "English"
+                
+                break
+
+            elif choice == 2:
+                print("Spanish was chosen")
+
+                language_setting = "Spanish"
+            
+                break
+            else:
+                print("Invalid choice! Please select again.")
+    
+    
+            
 
 #function to handle guest controls
 def guest_controls_selection():
+
+    global sms 
+    global email
+    global advertising
+
     while True:
-        print("1. InCollege email")
-        print("2. SMS")
-        print("3. Targeted Advertising features")
-        print("4. Exit")
-        choice = int(input("Select an option to turn on/off one of the above:"))
-        if choice == 1:
-            print("InCollege email was turned on/off")
-        elif choice == 2:
-            print("SMS was turned on/off")
-        elif choice == 3:
-            print("Targeted Advertising features email was turned on/off")
-        elif choice == 4:
+        if Config.FLAG == False:
+            print("Language controls can only be modified by signed-in users.")
             break
-        else:
-            print("Invalid choice! Please select again.")
+        else: 
+            print("1. InCollege email")
+            print("2. SMS")
+            print("3. Targeted Advertising features")
+            print("4. Exit")
+            choice = int(input("Select an option to turn on/off one of the above:"))
+            if choice == 1:
+                print("InCollege email: turn on/off. Press 1 for on or 2 for off.")
+                choice = int(input())
+                if choice == 1:
+                    email = "on"
+                elif choice == 2:
+                    email = "off"
+            elif choice == 2:
+                print("InCollege SMS: turn on/off. Press 1 for on or 2 for off.")
+                choice = int(input())
+                if choice == 1:
+                    email = "on"
+                elif choice == 2:
+                    email = "off"
+            elif choice == 3:
+                print("InCollege Advertising: turn on/off. Press 1 for on or 2 for off.")
+                choice = int(input())
+                if choice == 1:
+                    email = "on"
+                elif choice == 2:
+                    email = "off"
+            elif choice == 4:
+                break
+            else:
+                print("Invalid choice! Please select again.")
+    
+  
 
 
 #function to handle user's selection for useful links
@@ -161,6 +208,36 @@ def incollege_important_links_user_selection():
         else:
             print("\nInvalid choice. Please try again.")
 
+
+def adding_userInformation():
+    #adding information about the user 
+    global language_setting
+    global sms
+    global email
+    global advertising 
+    
+    account = Config.SYSTEM_ACCOUNT or ['Default First Name', 'Default Last Name']
+
+
+    controls = {
+
+        'Language':[language_setting] or ['English'],
+        'Sms':[sms] or ['on'],
+        'Email':[email] or ['on'],
+        'Advertising':[advertising] or ['on'],
+        'First':account[0],
+        'Last': account[1]
+    }
+
+    controls = pd.DataFrame(controls, index=[0])
+    accounts_controls = pd.concat([accounts_controls, controls], ignore_index=True)
+    accounts_controls.to_csv('components/accounts_controls.csv', index=False)
+
+    print("You have successfully changed guest controls!")    
+    print("\n")
+
+
+
 #main function to call both links
 def general_menu():
     while True:
@@ -172,13 +249,11 @@ def general_menu():
             
         elif choice == 2:
             # When user choose inCollege important links
-            incollege_important_links_user_selection()
+            incollege_important_links_user_selection()       
+
         elif choice == 3:
             # Exit menu
-            if Config.FLAG != True:
-                home_screen()
-            else:
-                break
+            break
         else:
             print("Invalid choice. Please try again.")
         
