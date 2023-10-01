@@ -11,7 +11,6 @@ def main():
 
     welcome()
     home_screen()
-    #in_InCollege_System()
     general_menu()
     if Config.FLAG == True:
         search()

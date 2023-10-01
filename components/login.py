@@ -6,6 +6,7 @@ from components.config import Config
 
 """Store accounts in a csv file. Each row contains a username and password."""
 accounts = pd.read_csv('components/accounts.csv')
+accounts_controls = pd.read_csv('components/accounts_controls.csv')
 
 def in_InCollege_System():
     """Function for checking if user is in the InCollege system."""
@@ -66,6 +67,7 @@ def exceeded_login_attempts(attempts = 5):
 def create_new_account():
     """Function for creating a new account."""
     global accounts 
+    global accounts_controls
 
     if exceeded_login_attempts():
         print("All permitted accounts have been created, please come back later.")
@@ -88,6 +90,12 @@ def create_new_account():
     accounts = pd.concat([accounts, newAccount], ignore_index=True)
     accounts.to_csv('components/accounts.csv', index=False)
     print("You have successfully created an account!")
+
+    newAccount_controls = {'language': 'English', 'sms': True, 'email': True, 'advertising': True, 'first': first, 'last': last}
+
+    newAccount_controls = pd.DataFrame(newAccount_controls, index=[0])
+    accounts_controls = pd.concat([accounts_controls, newAccount_controls], ignore_index=True)
+    accounts_controls.to_csv('components/accounts_controls.csv', index=False)
 
 def login():
     """Login function."""
