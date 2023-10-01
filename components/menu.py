@@ -141,36 +141,6 @@ def general_link_selection(choice, isLogin = False):
         print("\nInvalid Choice. Please Try Again")
 
 
-
-def adding_userInformation():
-    #adding information about the user 
-    global language_setting
-    global sms
-    global email
-    global advertising 
-    
-    account = Config.SYSTEM_ACCOUNT or ['Default First Name', 'Default Last Name']
-
-
-    controls = {
-
-        'Language':[language_setting] or ['English'],
-        'Sms':[sms] or ['on'],
-        'Email':[email] or ['on'],
-        'Advertising':[advertising] or ['on'],
-        'First':account[0],
-        'Last': account[1]
-    }
-
-    controls = pd.DataFrame(controls, index=[0])
-    accounts_controls = pd.concat([accounts_controls, controls], ignore_index=True)
-    accounts_controls.to_csv('components/accounts_controls.csv', index=False)
-
-    print("You have successfully changed guest controls!")    
-    print("\n")
-
-
-
 # --------------------------Main Function--------------------------
 def general_menu():
     while True:
