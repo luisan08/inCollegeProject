@@ -96,9 +96,7 @@ def create_new_account():
     newAccount_controls = pd.DataFrame(newAccount_controls, index=[0])
     accounts_controls = pd.concat([accounts_controls, newAccount_controls], ignore_index=True)
     accounts_controls.to_csv('components/accounts_controls.csv', index=False)
-
-    Config.SYSTEM_ACCOUNT = (first, last)
-    Config.FLAG = True
+    
 def login():
     """Login function."""
 

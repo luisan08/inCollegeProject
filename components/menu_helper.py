@@ -1,12 +1,7 @@
 from components.config import Config
 import pandas as pd
 
-def fetch_accounts_controls(data = 'components/accounts_controls.csv', system_account_first = Config.SYSTEM_ACCOUNT[0], system_account_last = Config.SYSTEM_ACCOUNT[1]):
-    accounts_controls = pd.read_csv(data)
-    system_account_index = accounts_controls[(accounts_controls['first'] == system_account_first) & (accounts_controls['last'] == system_account_last)].index[0]
-    system_account = accounts_controls[(accounts_controls['first'] == system_account_first) & (accounts_controls['last'] == system_account_last)]
-    return accounts_controls, system_account_index, system_account
-
+accounts_controls = pd.read_csv('components/accounts_controls.csv')
 
 def TurnOnOff(feature, feature_name):
     if feature:
@@ -20,7 +15,8 @@ def TurnOnOff(feature, feature_name):
         return False
 
 def guest_controls_selection():
-    accounts_controls, system_account_index, system_account = fetch_accounts_controls()
+    system_account_index = accounts_controls[(accounts_controls['first'] == Config.SYSTEM_ACCOUNT[0]) & (accounts_controls['last'] == Config.SYSTEM_ACCOUNT[1])].index[0]
+    system_account = accounts_controls[(accounts_controls['first'] == Config.SYSTEM_ACCOUNT[0]) & (accounts_controls['last'] == Config.SYSTEM_ACCOUNT[1])]
 
     sms = system_account['sms'].values[0]
     email = system_account['email'].values[0]
@@ -55,7 +51,8 @@ def guest_controls_selection():
 
 #function to handle language option
 def language_option():
-    accounts_controls, system_account_index, system_account = fetch_accounts_controls()
+    system_account_index = accounts_controls[(accounts_controls['first'] == Config.SYSTEM_ACCOUNT[0]) & (accounts_controls['last'] == Config.SYSTEM_ACCOUNT[1])].index[0]
+    system_account = accounts_controls[(accounts_controls['first'] == Config.SYSTEM_ACCOUNT[0]) & (accounts_controls['last'] == Config.SYSTEM_ACCOUNT[1])]
 
     language = system_account['language'].values[0]
     
