@@ -1,8 +1,6 @@
 from components.config import Config
 import components.login as login
-from components.home_screen import home_screen
 import components.menu_helper as menu_helper
-from components.menu_helper import guest_controls_selection, language_option
 import pandas as pd
 
 accounts = pd.read_csv('components/accounts.csv')
@@ -45,6 +43,8 @@ def display_general_links(isLogin = False):
         print("1. Sign Up")
     else:
         print("1. Sign Out")
+        Config.FLAG = False
+        Config.SYSTEM_ACCOUNT = None
     print("2. Help Center")
     print("3. About")
     print("4. Press")
@@ -97,6 +97,7 @@ def incollege_important_links_user_selection():
             if not Config.FLAG:
                 print("\nPlease log in to your account before setting")
                 login.login()
+                break
             print("Select 1 for Guest Controls, anything else to exit")
             c = int(input("Your choice: "))
             if c == 1:
