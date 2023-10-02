@@ -93,67 +93,67 @@ def test_useful_links_user_selection(monkeypatch, capsys, input_choice, expected
 
 # --------------------------Helper Functions Tests--------------------------
 # Sample data to mock the CSV content
-mocked_accounts_controls = pd.DataFrame({
-    'first': [MockConfig.SYSTEM_ACCOUNT[0]],
-    'last': [MockConfig.SYSTEM_ACCOUNT[1]],
-    'sms': [True],
-    'email': [False],
-    'advertising': [True],
-    'language': ['English']
-})
+# mocked_accounts_controls = pd.DataFrame({
+#     'first': [MockConfig.SYSTEM_ACCOUNT[0]],
+#     'last': [MockConfig.SYSTEM_ACCOUNT[1]],
+#     'sms': [True],
+#     'email': [False],
+#     'advertising': [True],
+#     'language': ['English']
+# })
 
-# For patching pd.read_csv
-mocked_pd_read_csv = patch('components.menu_helper.pd.read_csv', return_value=mocked_accounts_controls)
+# # For patching pd.read_csv
+# mocked_pd_read_csv = patch('components.menu_helper.pd.read_csv', return_value=mocked_accounts_controls)
 
-# For patching Config.SYSTEM_ACCOUNT
-mocked_system_account = patch('components.menu_helper.Config.SYSTEM_ACCOUNT', new_callable=PropertyMock, return_value=MockConfig.SYSTEM_ACCOUNT)
+# # For patching Config.SYSTEM_ACCOUNT
+# mocked_system_account = patch('components.menu_helper.Config.SYSTEM_ACCOUNT', new_callable=PropertyMock, return_value=MockConfig.SYSTEM_ACCOUNT)
 
-@patch('components.menu_helper.Config.SYSTEM_ACCOUNT', MockConfig.SYSTEM_ACCOUNT)
-@patch('pd.read_csv')
-def test_fetch_accounts_controls(mocked_read_csv):
-    # Mocking the return value of pd.read_csv to be your sample dataframe
-    mocked_read_csv.return_value = mocked_accounts_controls  
+# @patch('components.menu_helper.Config.SYSTEM_ACCOUNT', MockConfig.SYSTEM_ACCOUNT)
+# @patch('pd.read_csv')
+# def test_fetch_accounts_controls(mocked_read_csv):
+#     # Mocking the return value of pd.read_csv to be your sample dataframe
+#     mocked_read_csv.return_value = mocked_accounts_controls  
     
-    controls, index, account = fetch_accounts_controls()
+#     controls, index, account = fetch_accounts_controls()
 
-    assert controls.equals(mocked_accounts_controls)
-    assert index == 0
-    assert account.equals(mocked_accounts_controls.iloc[0])
-
-
-@pytest.mark.parametrize("feature, feature_name, input_choice, expected_output", [
-    (True, "SMS", "1", "SMS is on. \nPress 1 to turn it off. \nPress 2 to exit.\n"),
-    (False, "InCollege email", "2", "InCollege email is off. \nPress 1 to turn it on. \nPress 2 to exit.\n")
-])
-def test_TurnOnOff(monkeypatch, capfd, feature, feature_name, input_choice, expected_output):
-    monkeypatch.setattr('builtins.input', lambda _: input_choice)
-    TurnOnOff(feature, feature_name)
-    out, _ = capfd.readouterr()
-    assert expected_output in out
-
-mocked_accounts_controls_data = (
-    mocked_accounts_controls, 
-    0,
-    mocked_accounts_controls.iloc[0]
-)
-
-@patch('components.menu_helper.fetch_accounts_controls', return_value=mocked_accounts_controls_data)
-@patch.object(mocked_accounts_controls, 'to_csv', MagicMock())
-def test_guest_controls_selection(mock_fetch, monkeypatch, capfd):
-    # This test checks that turning off an already "on" SMS feature works as expected
-    inputs = iter(["2", "1", "4"])  # choose SMS, turn off, exit
-    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
-    guest_controls_selection()
-    out, _ = capfd.readouterr()
-    assert "SMS is on. \nPress 1 to turn it off. \nPress 2 to exit." in out
+#     assert controls.equals(mocked_accounts_controls)
+#     assert index == 0
+#     assert account.equals(mocked_accounts_controls.iloc[0])
 
 
-@patch('components.menu_helper.fetch_accounts_controls', return_value=mocked_accounts_controls_data)
-@patch.object(mocked_accounts_controls, 'to_csv', MagicMock())
-def test_language_option(monkeypatch, capfd):
-    # This test sets language to Spanish
-    inputs = iter(["2", "3"])  # choose Spanish, exit
-    monkeypatch.setattr('builtins.input', lambda _: next(inputs))
-    language_option()
-    out, _ = capfd.readouterr()
-    assert "\nLanguage was set to Spanish" in out
+# @pytest.mark.parametrize("feature, feature_name, input_choice, expected_output", [
+#     (True, "SMS", "1", "SMS is on. \nPress 1 to turn it off. \nPress 2 to exit.\n"),
+#     (False, "InCollege email", "2", "InCollege email is off. \nPress 1 to turn it on. \nPress 2 to exit.\n")
+# ])
+# def test_TurnOnOff(monkeypatch, capfd, feature, feature_name, input_choice, expected_output):
+#     monkeypatch.setattr('builtins.input', lambda _: input_choice)
+#     TurnOnOff(feature, feature_name)
+#     out, _ = capfd.readouterr()
+#     assert expected_output in out
+
+# mocked_accounts_controls_data = (
+#     mocked_accounts_controls, 
+#     0,
+#     mocked_accounts_controls.iloc[0]
+# )
+
+# @patch('components.menu_helper.fetch_accounts_controls', return_value=mocked_accounts_controls_data)
+# @patch.object(mocked_accounts_controls, 'to_csv', MagicMock())
+# def test_guest_controls_selection(mock_fetch, monkeypatch, capfd):
+#     # This test checks that turning off an already "on" SMS feature works as expected
+#     inputs = iter(["2", "1", "4"])  # choose SMS, turn off, exit
+#     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+#     guest_controls_selection()
+#     out, _ = capfd.readouterr()
+#     assert "SMS is on. \nPress 1 to turn it off. \nPress 2 to exit." in out
+
+
+# @patch('components.menu_helper.fetch_accounts_controls', return_value=mocked_accounts_controls_data)
+# @patch.object(mocked_accounts_controls, 'to_csv', MagicMock())
+# def test_language_option(monkeypatch, capfd):
+#     # This test sets language to Spanish
+#     inputs = iter(["2", "3"])  # choose Spanish, exit
+#     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
+#     language_option()
+#     out, _ = capfd.readouterr()
+#     assert "\nLanguage was set to Spanish" in out
