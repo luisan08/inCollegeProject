@@ -2,6 +2,7 @@ from components.config import Config
 import components.login as login
 import components.menu_helper as menu_helper
 import components.search as search
+import components.friends as friends
 import pandas as pd
 
 accounts = pd.read_csv('components/accounts.csv')
@@ -164,7 +165,7 @@ def general_menu():
         
         elif choice == 4:
             # When user choose inCollege for friends
-            search.search() 
+            friends.friends()
 
         elif choice == 5:
             # Exit menu
