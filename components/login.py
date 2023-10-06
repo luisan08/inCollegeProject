@@ -59,7 +59,7 @@ def validate_password(password):
         return False
     return True
 
-def exceeded_login_attempts(attempts = 5):
+def exceeded_login_attempts(attempts = 10):
     """Helper function for checking if login attempts have been exceeded."""
     """Function returns True if login attempts have been exceeded, False otherwise."""
     return len(accounts) >= attempts

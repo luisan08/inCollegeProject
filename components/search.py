@@ -1,6 +1,7 @@
 import pandas as pd
 from components.config import Config
 from components.menu import general_menu
+import components.login as login
 
 accounts = pd.read_csv('components/accounts.csv')
 accounts_jobs = pd.read_csv('components/accounts_jobs.csv')
@@ -122,6 +123,9 @@ def skillSearch():
         
 # search is the main search function where other searches can be selected
 def search(): 
+    if not Config.FLAG:
+            print("\nPlease log in to your account before searching for jobs")
+            login.login()
     print("\nSearch Options:\n1. Look for Jobs\n2. Find People You Know\n3. Learn a Skill\n4. Quit Search")
     searchChoice = int(input("Please enter your desired search: "))
 

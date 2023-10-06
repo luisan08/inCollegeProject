@@ -1,6 +1,7 @@
 from components.config import Config
 import components.login as login
 import components.menu_helper as menu_helper
+import components.search as search
 import pandas as pd
 
 accounts = pd.read_csv('components/accounts.csv')
@@ -11,7 +12,9 @@ accounts_controls = pd.read_csv('components/accounts_controls.csv')
 def display_groups_of_links():
     print("\n1. Useful Links")
     print("2. InCollege Important Links")
-    print("3. Exit menu")
+    print("3. Search for Jobs")
+    print("4. Friends")
+    print("5. Exit menu")
 
 """Function to display useful links"""
 def display_useful_links():
@@ -153,9 +156,17 @@ def general_menu():
             
         elif choice == 2:
             # When user choose inCollege important links
-            incollege_important_links_user_selection()       
-
+            incollege_important_links_user_selection()  
+        
         elif choice == 3:
+            # When user choose inCollege for searching jobs
+            search.search() 
+        
+        elif choice == 4:
+            # When user choose inCollege for friends
+            search.search() 
+
+        elif choice == 5:
             # Exit menu
             break
         else:

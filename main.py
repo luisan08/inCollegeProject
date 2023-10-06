@@ -11,8 +11,6 @@ def main():
     welcome()
     home_screen()
     general_menu()
-    if Config.FLAG == True:
-        search()
 
 
 if __name__ == "__main__":
