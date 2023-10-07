@@ -9,7 +9,7 @@ friendLists = json.load(open('components/friendLists.json'))
 def send_request(username):
     for user in friendLists:
         if username in user:
-            user[username]['pendingRequest'].append(Config.SYSTEM_ACCOUNT[0])
+            user[username]['pendingRequest'].append(Config.SYSTEM_ACCOUNT[2])
             break
     with open('components/friendLists.json', 'w') as f:
         json.dump(friendLists, f)
@@ -23,7 +23,8 @@ def find_someone():
     filtered_accounts = accounts[
         (accounts['last'] == last) & 
         (accounts['university'] == university) & 
-        (accounts['major'] == major)
+        (accounts['major'] == major) &
+        (accounts['username'] != Config.SYSTEM_ACCOUNT[2])
     ]
     if filtered_accounts.empty:
         print("No results found.")
@@ -83,7 +84,7 @@ def notifications(username):
                             print("Do you want to add this person to your friend list?")
                             c = int(input("\n1. Accept\n2. Deny\nPlease enter your choice: "))
                             if c == 1:
-                                process_request(username, Config.SYSTEM_ACCOUNT[0])
+                                process_request(requests[choice], Config.SYSTEM_ACCOUNT[2])
 
                             user[username]['pendingRequest'].remove(requests[choice])
                             with open('components/friendLists.json', 'w') as f:
@@ -97,7 +98,7 @@ def friends():
             print("\nPlease log in to your account before finding friends and connections")
             login.login()
             return
-    notifications(Config.SYSTEM_ACCOUNT[0])
+    notifications(Config.SYSTEM_ACCOUNT[2])
     print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
     choice = int(input("Please enter your choice: "))
     while True:

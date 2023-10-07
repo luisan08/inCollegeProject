@@ -15,7 +15,8 @@ def display_groups_of_links():
     print("2. InCollege Important Links")
     print("3. Search for Jobs")
     print("4. Friends")
-    print("5. Exit menu")
+    print("5. Sign up/Log in")
+    print("6. Exit menu")
 
 """Function to display useful links"""
 def display_useful_links():
@@ -168,6 +169,9 @@ def general_menu():
             friends.friends()
 
         elif choice == 5:
+            # Option for login in
+            login.login()
+        elif choice == 6:
             # Exit menu
             break
         else:

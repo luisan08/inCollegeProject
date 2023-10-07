@@ -38,7 +38,7 @@ def login_existing_account():
         if (username, password) in zip(accounts['username'], accounts['password']):
             print("You have successfully logged in!")
             first_name, last_name =  get_first_last_name(username, password)
-            Config.SYSTEM_ACCOUNT = (first_name, last_name)
+            Config.SYSTEM_ACCOUNT = (first_name, last_name, username)
             Config.FLAG = True
             return False
         else:
