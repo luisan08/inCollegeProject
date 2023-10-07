@@ -93,23 +93,93 @@ def notifications(username):
                             print(f"Choice must be between 0 and {len(requests)}")        
     return
 
+def accept_request(username):
+    for user in friendLists:
+        if username in user:
+            if Config.SYSTEM_ACCOUNT[2] in user[username]['pendingRequest']:
+                user[username]['pendingRequest'].remove(Config.SYSTEM_ACCOUNT[2])
+                user[username]['friendList'].append(Config.SYSTEM_ACCOUNT[2])
+                for system_user in friendLists:
+                    if Config.SYSTEM_ACCOUNT[2] in system_user:
+                        system_user[Config.SYSTEM_ACCOUNT[2]]['friendList'].append(username)
+                        break
+            else:
+                print("No pending request from this user.")
+            with open('components/friendLists.json', 'w') as f:
+                json.dump(friendLists, f)
+            return True
+    return False
+
+def reject_request(username):
+    for user in friendLists:
+        if username in user:
+            if Config.SYSTEM_ACCOUNT[2] in user[username]['pendingRequest']:
+                user[username]['pendingRequest'].remove(Config.SYSTEM_ACCOUNT[2])
+                with open('components/friendLists.json', 'w') as f:
+                    json.dump(friendLists, f)
+                return True
+            else:
+                print("No pending request from this user.")
+    return False
+
+def show_my_network(username):
+    for user in friendLists:
+        if username in user:
+            my_network = user[username]['friendList']
+            if not my_network:
+                print("You don't have any connections yet.")
+            else:
+                print("Your network:")
+                for friend in my_network:
+                    print(friend)
+            return
+
+def disconnect(username, friend_to_disconnect):
+    for user in friendLists:
+        if username in user:
+            if friend_to_disconnect in user[username]['friendList']:
+                user[username]['friendList'].remove(friend_to_disconnect)
+                for friend in friendLists:
+                    if friend_to_disconnect in friend:
+                        friend[friend_to_disconnect]['friendList'].remove(username)
+                        break
+                with open('components/friendLists.json', 'w') as f:
+                    json.dump(friendLists, f)
+                return True
+            else:
+                print("You are not connected with this user.")
+    return False
+
 def friends():
     if not Config.FLAG:
-            print("\nPlease log in to your account before finding friends and connections")
-            login.login()
-            return
+        print("\nPlease log in to your account before finding friends and connections")
+        login.login()
+        return
+    
     notifications(Config.SYSTEM_ACCOUNT[2])
+
     print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
     choice = int(input("Please enter your choice: "))
-    while True:
+    while True:    
         if choice == 1:
             find_someone()
-            break
         elif choice == 2:
-            print("Under construction.")
-            break
+            show_my_network(Config.SYSTEM_ACCOUNT[2])
+            while True:
+                action = input("Enter 'd' to disconnect from a friend or 'q' to quit: ")
+                if action == 'd':
+                    friend_to_disconnect = input("Enter the username of the friend you want to disconnect from: ")
+                    if disconnect(Config.SYSTEM_ACCOUNT[2], friend_to_disconnect):
+                        print(f"You have disconnected from {friend_to_disconnect}.")
+                    else:
+                        print(f"You are not connected with {friend_to_disconnect}.")
+                elif action == 'q':
+                    break
+                else:
+                    print("Invalid choice. Please enter 'd' or 'q'.")
         elif choice == 3:
             break
         else:
-            choice = int(input("Invalid choice. Please enter a valid choice: "))
+            print("Invalid choice. Please enter a valid choice.")
+
     return
