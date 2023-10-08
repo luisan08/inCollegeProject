@@ -1,4 +1,5 @@
 import pandas as pd
+import json
 from components.config import Config
 
 
@@ -7,6 +8,7 @@ from components.config import Config
 """Store accounts in a csv file. Each row contains a username and password."""
 accounts = pd.read_csv('components/accounts.csv')
 accounts_controls = pd.read_csv('components/accounts_controls.csv')
+friendLists = json.load(open('components/friendLists.json'))
 
 def in_InCollege_System():
     """Function for checking if user is in the InCollege system."""
@@ -36,7 +38,7 @@ def login_existing_account():
         if (username, password) in zip(accounts['username'], accounts['password']):
             print("You have successfully logged in!")
             first_name, last_name =  get_first_last_name(username, password)
-            Config.SYSTEM_ACCOUNT = (first_name, last_name)
+            Config.SYSTEM_ACCOUNT = (first_name, last_name, username)
             Config.FLAG = True
             return False
         else:
@@ -59,7 +61,7 @@ def validate_password(password):
         return False
     return True
 
-def exceeded_login_attempts(attempts = 5):
+def exceeded_login_attempts(attempts = 10):
     """Helper function for checking if login attempts have been exceeded."""
     """Function returns True if login attempts have been exceeded, False otherwise."""
     return len(accounts) >= attempts
@@ -84,12 +86,20 @@ def create_new_account():
         password = input("Please enter your password: ")
     first = input("Please enter your first name: ")
     last = input("Please enter your last name: ")
-    newAccount = {'username': username, 'password': password, 'first': first, 'last': last}
+    university = input("Please enter your university: ")
+    major = input("Please enter your major: ")
+    friendList = []
+    pendingRequest = []
+    newAccount = {'username': username, 'password': password, 'first': first, 'last': last, 'university': university, 'major': major}
     
     newAccount = pd.DataFrame(newAccount, index=[0])
     accounts = pd.concat([accounts, newAccount], ignore_index=True)
     accounts.to_csv('components/accounts.csv', index=False)
     print("You have successfully created an account!")
+    newList = {username: {'friendList': friendList, 'pendingRequest': pendingRequest}}
+    friendLists.append(newList)
+    with open('components/friendLists.json', 'w') as f:
+        json.dump(friendLists, f)
 
     newAccount_controls = {'language': 'English', 'sms': True, 'email': True, 'advertising': True, 'first': first, 'last': last}
 

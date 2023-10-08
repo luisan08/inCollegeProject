@@ -1,5 +1,15 @@
-from components.menu import *
-from components.menu_helper import *
+from components.menu import (
+    display_groups_of_links,
+    display_useful_links,
+    display_inCollege_important_link,
+    display_general_links,
+    useful_links_user_selection
+)
+from components.menu_helper import (
+    TurnOnOff,
+    guest_controls_selection,
+    language_option
+)
 from unittest.mock import MagicMock, PropertyMock
 from unittest.mock import patch
 import pandas as pd
@@ -12,7 +22,10 @@ def test_display_groups_of_links(capsys):
     captured = capsys.readouterr()
     assert "\n1. Useful Links" in captured.out
     assert "2. InCollege Important Links" in captured.out
-    assert "3. Exit menu" in captured.out
+    assert "3. Search for Jobs" in captured.out
+    assert "4. Friends" in captured.out
+    assert "5. Sign up/Log in" in captured.out
+    assert "6. Exit menu" in captured.out
 
 def test_display_useful_links(capsys):
     display_useful_links()

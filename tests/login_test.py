@@ -15,7 +15,7 @@ def test_failure_messsage_when_log_in_failed(monkeypatch, capfd):
             
     assert "Incorrect username or password. Please try again!" in out 
 
-@patch('components.login.accounts', pd.DataFrame({'username': ['minhuchiha', 'sdaffew', "asfsf", "dasd2343s", "adgrgre"], 'password': ['P@ssword2', '1232sfs@Asd', '12fs@Asd', '123$Asd', '132sfs@Asd']}))    
+@patch('components.login.accounts', pd.DataFrame({'username': ['minhuchiha', 'sdaffew', "asfsf", "dasd2343s", "adgrgre", "camila", "pedro", "john", "luis", "alejandro"], 'password': ['P@ssword2', '1232sfs@Asd', '12fs@Asd', '123$Asd', '132sfs@Asd', 'P@ssw0', '12A!bCd', 'L0g!n2023', 'Sec#r!Ty9', 'P@$$w0rD']}))    
 def test_stop_when_log_in_attempts_exceeded(monkeypatch, capfd):
     inputs = iter(['username', 'P@234fssword1'])
     monkeypatch.setattr('builtins.input', lambda _: next(inputs))
