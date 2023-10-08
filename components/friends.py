@@ -93,35 +93,6 @@ def notifications(username):
                             print(f"Choice must be between 0 and {len(requests)}")        
     return
 
-def accept_request(username):
-    for user in friendLists:
-        if username in user:
-            if Config.SYSTEM_ACCOUNT[2] in user[username]['pendingRequest']:
-                user[username]['pendingRequest'].remove(Config.SYSTEM_ACCOUNT[2])
-                user[username]['friendList'].append(Config.SYSTEM_ACCOUNT[2])
-                for system_user in friendLists:
-                    if Config.SYSTEM_ACCOUNT[2] in system_user:
-                        system_user[Config.SYSTEM_ACCOUNT[2]]['friendList'].append(username)
-                        break
-            else:
-                print("No pending request from this user.")
-            with open('components/friendLists.json', 'w') as f:
-                json.dump(friendLists, f)
-            return True
-    return False
-
-def reject_request(username):
-    for user in friendLists:
-        if username in user:
-            if Config.SYSTEM_ACCOUNT[2] in user[username]['pendingRequest']:
-                user[username]['pendingRequest'].remove(Config.SYSTEM_ACCOUNT[2])
-                with open('components/friendLists.json', 'w') as f:
-                    json.dump(friendLists, f)
-                return True
-            else:
-                print("No pending request from this user.")
-    return False
-
 def show_my_network(username):
     for user in friendLists:
         if username in user:
