@@ -21,9 +21,9 @@ def find_someone():
     major = input("Please enter the major of the person you are looking for: ")
     print("Here are the results for your search: ")
     filtered_accounts = accounts[
-        (accounts['last'] == last) & 
-        (accounts['university'] == university) & 
-        (accounts['major'] == major) &
+        (accounts['last'] == last) | 
+        (accounts['university'] == university) | 
+        (accounts['major'] == major) |
         (accounts['username'] != Config.SYSTEM_ACCOUNT[2])
     ]
     if filtered_accounts.empty:
