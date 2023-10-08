@@ -159,13 +159,16 @@ def friends():
     notifications(Config.SYSTEM_ACCOUNT[2])
 
     print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
-    choice = int(input("Please enter your choice: "))
-    while True:    
+    choice = None
+    while True:  
+        print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
+        choice = int(input("Please enter your choice: "))
         if choice == 1:
             find_someone()
         elif choice == 2:
             show_my_network(Config.SYSTEM_ACCOUNT[2])
-            while True:
+            action = None
+            while action != 'd' and action != 'q':
                 action = input("Enter 'd' to disconnect from a friend or 'q' to quit: ")
                 if action == 'd':
                     friend_to_disconnect = input("Enter the username of the friend you want to disconnect from: ")
