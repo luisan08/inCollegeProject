@@ -1,0 +1,480 @@
+commit e412aedd09df307292e314065552fdbcd7201cf4
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 8 15:37:52 2023 -0400
+
+    All test for friends successful
+
+commit 74752bf3fe75e9dfeafad8a8c9f3f8d86d94d7e8
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 8 11:49:12 2023 -0400
+
+    disconnet and shownetwork test
+
+commit ecf7f2d59bbac7d96f0b4a92042d1473b8dca551
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 8 10:45:33 2023 -0400
+
+    change and to or find_someone
+
+commit 313156bd6145f6b091186b929386579683a7086b
+Merge: 11fbd0f b4eb52a
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sat Oct 7 22:19:41 2023 -0400
+
+    Merge pull request #15 from luisan08/new-log_in-test
+    
+    Added 5 more usernames and passwords to log-in test
+
+commit 11fbd0f5296daf7a746d80e79548d57d83e94bcc
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sat Oct 7 22:18:30 2023 -0400
+
+    all old test passes
+
+commit 511399209de4d7686d09b7133bfc8a7b5c17d2de
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sat Oct 7 21:35:09 2023 -0400
+
+    fix show network infinite loop
+
+commit 4b1bd22d102d5e3c92458a56798360b4d062899f
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sat Oct 7 18:50:10 2023 -0400
+
+    Update friends.py
+
+commit b4eb52ab19f92723856a5b5947fe1d784250d6df
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sat Oct 7 16:57:53 2023 -0400
+
+    Added 5 more usernames and passwords to log-in test
+
+commit eab0b7e4107ada9fda9fbc3188fca16d79d03330
+Author: Minh Uchiha <minhsalamander09@gmail.com>
+Date:   Sat Oct 7 16:24:58 2023 -0400
+
+    Fix bugs and add option to log in/sign up
+
+commit 26214c81aca89e26999ff2721d65d81bb49bb9d1
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Fri Oct 6 16:33:14 2023 -0400
+
+    add friend modules
+
+commit 24b73c6ea2a9a7ce4dbe9cb2072f35ecf9c51228
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Fri Oct 6 13:45:46 2023 -0400
+
+    add friends module demo
+
+commit 9753aae2a5f8bfa2bf44838650af6ece93f12d08
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Fri Oct 6 13:02:28 2023 -0400
+
+    Fix Menu test succesfully
+
+commit 29a13b6044905e29c171d7f56a96b0b19dc76391
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 1 23:10:07 2023 -0400
+
+    fix bugs of menu_helps
+
+commit a5069a299458d500627ce9370a5e7a1fa6353675
+Merge: f61f249 dd0f16d
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 1 22:52:02 2023 -0400
+
+    Merge pull request #13 from luisan08/menu_test
+    
+    Menu test 11/13 test pass
+
+commit dd0f16dc6b50c69163d05adaeafa3a14fffee39a
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 1 22:51:23 2023 -0400
+
+    comment out the test
+
+commit 3b6ad0ed92bbf62a617a3a987e3cea16a6a3d3cf
+Merge: 3e78edd 77c0ad5
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 1 22:50:41 2023 -0400
+
+    Merge remote-tracking branch 'origin/menu_test' into menu_test
+
+commit 3e78edd65b4d858904f438eecbd2fccaa8d4e859
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 1 22:45:28 2023 -0400
+
+    comment
+
+commit 77c0ad5c4709198f4ed655c566e0b19963a76ce2
+Author: kaylrpalm <103464950+kaylrpalm@users.noreply.github.com>
+Date:   Sun Oct 1 22:16:02 2023 -0400
+
+    test_display_inCollege_important_link
+
+commit b0e280152a46e33502786813b43b8e164d8ea318
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 1 21:56:05 2023 -0400
+
+    git add menu_test
+
+commit 965513f0217bf44f265a674ce70bae58e0231153
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 1 18:13:55 2023 -0400
+
+    add DS_Store gitignore
+
+commit f61f249db0f02b6bf78e73c3fb41b39b4c5c4aef
+Merge: 39ef632 b714618
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 1 13:00:14 2023 -0400
+
+    Done Menu files
+    
+    Menu done
+
+commit b714618e3cf4e0ca8ccef406b67c8c5f5d28dbbe
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 1 16:58:16 2023 +0000
+
+    delete unnessarry function in menu
+
+commit 39ef6324a1f7999d46d525287ec3937fe4c9896a
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 1 12:58:02 2023 -0400
+
+    Accessibility print statement
+
+commit 96ebd562a7eaa858f34ea9e1fc9de870ebf753c0
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 1 16:38:01 2023 +0000
+
+    fix menu and done
+
+commit 2f95bf1b2bf3f141131065c4940da6b8e3be64d7
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sat Sep 30 22:50:33 2023 -0400
+
+    Saving user information if they are signed in
+
+commit c7494edc5369a93d82c9911a22208a7a9378d620
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Fri Sep 29 20:10:06 2023 -0400
+
+    Change to menu connections
+    
+    Connected some menus
+
+commit d2b420824cd37f600a42d48102c3e191274822cb
+Merge: 3f2a51c 611e4a5
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Fri Sep 29 19:44:30 2023 -0400
+
+    Merge pull request #10 from luisan08/Navigation_login_option
+    
+    Navigation login option
+
+commit 3f2a51c203a7c2412dee865afd297b4d161c4660
+Author: Minh Uchiha <minhsalamander09@gmail.com>
+Date:   Fri Sep 29 02:18:10 2023 -0400
+
+    Add options for important inCollege links
+
+commit 611e4a58cbca4869facabbbf13b124514873cea3
+Merge: 17108a0 4eb5348
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Thu Sep 28 11:00:00 2023 -0400
+
+    Merge pull request #9 from luisan08/Menu_NewVersion
+    
+    Make all the functions in menu.py shorter
+
+commit 4eb5348cff71f97981c6576f73b68ffdb160bcdf
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Wed Sep 27 22:20:12 2023 -0400
+
+    Fix menu functions shorter
+
+commit 17108a03f8a273feed5e2c513c3751dfa16d8e9e
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Wed Sep 27 21:16:45 2023 -0400
+
+    Navigation
+
+commit 7f397be67ccce46a068452689a468d12cb1b4378
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Wed Sep 27 19:27:45 2023 -0400
+
+    Navigation link/condition with login
+
+commit 44a829a5e41d9b081df69f06f4777ef251fd8809
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Wed Sep 27 08:49:19 2023 -0400
+
+    change file name navigation_links to menu
+
+commit 29b316149e8f7f7b0147db6f837d5fa3fc6a31cf
+Merge: e36fdcb c669aba
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Wed Sep 27 08:45:04 2023 -0400
+
+    Develop Menus
+    
+    Branch to develop all Menus
+
+commit c669aba91113f4f5a0d1338fe1452449abbc1daa
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Wed Sep 27 08:43:30 2023 -0400
+
+    Update login.py remove space
+
+commit bc958ed81a93dab94c46b364af33f831b8d5785b
+Merge: a107654 e36fdcb
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Wed Sep 27 08:42:33 2023 -0400
+
+    Merge branch 'main' into Menu_code
+
+commit a107654a41ad1f06f9d697e82ba624b2f99d8383
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Wed Sep 27 08:35:58 2023 -0400
+
+    Update login.py
+
+commit b25541625f8675f7ee8e22df87f863dfb6e2c61b
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Wed Sep 27 08:13:03 2023 -0400
+
+    Update accounts.csv
+
+commit e1133859df192236d0518e39995b2405f0dc2c9e
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Wed Sep 27 08:12:27 2023 -0400
+
+    Update accounts.csv
+
+commit fdd16474e7dd16fd41318e9b7290c50c7d6b9e8d
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Tue Sep 26 21:58:48 2023 -0400
+
+    Branch to develop all Menus
+
+commit e36fdcb0732235d6fcc1fb79f8f6e6721bb934ac
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Sep 24 22:59:06 2023 -0400
+
+    Update login.py
+
+commit aa25468abe322a3026ca16b509d5d5d56e3f8c28
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Sep 24 22:58:19 2023 -0400
+
+    Update search.py
+
+commit 2b366741f33684d47ff7c94c1a84707ba2172a27
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Sep 24 22:53:51 2023 -0400
+
+    Update search_test.py
+
+commit c17273a4f8d1f24184578bd22eeccc43b8839f44
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Sep 24 22:53:31 2023 -0400
+
+    Update login_test.py
+
+commit da8420034e70774a5091c5e9b0122ac6c5c40af3
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Sep 24 19:11:57 2023 -0400
+
+    Included the import statements.
+
+commit da86c65355240e704c8c89d5a076107d47d8f998
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Sep 24 19:08:23 2023 -0400
+
+    Add more test cases for peopleSearch function()
+    
+    Changed the name of test file to search_test.py
+
+commit 363aa2a6ae5b549578f6fdc33afa6601439a05f9
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Thu Sep 21 23:29:16 2023 -0400
+
+    Update login_test.py
+    
+    Added two more test cases which checks the first name and last name of a user is a part of InCollege system or not.
+
+commit 7b9f0c112ce5c7a4f9eee2157eafa6e63c5d3533
+Merge: dfb058e a26c781
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Thu Sep 21 20:34:48 2023 -0400
+
+    Merge branch 'job-posting-UPDATE'
+
+commit a26c7813d339ee4a5177e77a85700606d2386ddf
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Thu Sep 21 20:29:03 2023 -0400
+
+    New function + search
+    
+    New function to get first and last name
+
+commit dfb058ee910b7e8e930069ddc110e8cf4a5e17fd
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Thu Sep 21 20:28:31 2023 -0400
+
+    fix In_College func to display correctly message
+
+commit 1879f693f6a55975e5c30c143c15fad043ddc154
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Thu Sep 21 10:08:04 2023 -0400
+
+    Add Config file
+
+commit 4d5f8654efd4867076414351638d5d6a489ef1d7
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Thu Sep 21 08:42:27 2023 -0400
+
+    Add Student Success Story
+
+commit dd54b03d58f28d97cf5e25f29fa2ad05c144322d
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Wed Sep 20 22:48:53 2023 -0400
+
+    new search function for jobs and people
+
+commit d809193e49c56d45f3b214f288ee0a9f3fb468e2
+Merge: 3490ed4 7997fe6
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Wed Sep 20 11:15:49 2023 -0400
+
+    Fix login() main
+
+commit 7997fe6713d5d2f615cb08bd77ea504ebe1b3313
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Wed Sep 20 11:15:26 2023 -0400
+
+    Enhanced login and Home Screen #2
+
+commit 3490ed452dc4e68bb6beff4fe7e60c0f97693e17
+Merge: 32e89f8 0bb17ba
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Wed Sep 20 11:06:03 2023 -0400
+
+    Merge remote-tracking branch 'origin/main'
+
+commit 32e89f83c51e773b0f50bcb41bddd27405f8f48d
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Wed Sep 20 09:13:47 2023 -0400
+
+    Enhanced login and Home Screen #1
+
+commit 07d63396d2a0a4f96239c8384e0103f63f544622
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Wed Sep 20 09:02:10 2023 -0400
+
+    Enhanced login and Home Screen #1
+
+commit 0bb17badd1a9a8c4ce4f2ce29e1431a7036d8d4a
+Merge: 5a48a20 b6c4bec
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Wed Sep 20 08:27:31 2023 -0400
+
+    Merge pull request #4
+    
+    Update README file and add requirements.txt file
+
+commit b6c4bec01d6a919238af653753dbeee5aa7830cd
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Mon Sep 18 08:40:56 2023 -0400
+
+    Update README and add requirements.txt
+
+commit 06107d8abef29c03d4270c0bf40ed07ef8e8f812
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Mon Sep 18 08:28:40 2023 -0400
+
+    Merge remote-tracking branch 'origin/main' into new
+
+commit e307a3c635caac87cad42f774de6a9e86da51b32
+Merge: aa02dd0 5a48a20
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Mon Sep 18 08:28:23 2023 -0400
+
+    Merge remote-tracking branch 'origin/main' into new
+
+commit aa02dd0fa80b75685f65f5722d4158c514a19b43
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Mon Sep 18 08:17:09 2023 -0400
+
+    add requirements.txt and update README
+
+commit 5a48a20339f110dfa13974b54b3f91b628a06a42
+Merge: 2a3b65f ccc2f42
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Sep 17 18:08:28 2023 -0400
+
+    Merge pull request #3 from luisan08/login_test
+    
+    Created 3 tests for login and 7 tests for options
+
+commit ccc2f42cdf25f6a03a30499cd2de908c3b15e498
+Author: Minh Uchiha <minhsalamander09@gmail.com>
+Date:   Sun Sep 17 18:02:39 2023 -0400
+
+    Created 3 tests for login and 7 tests for options
+
+commit df00117c06fcb00b35776c6184122ea2474d657e
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Sep 17 16:55:59 2023 -0400
+
+    delete unnecessary comments
+
+commit 07b872ad3338797dc79fb4c212414fb0ad855825
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Sep 17 16:03:57 2023 -0400
+
+    fix login_test
+
+commit 2a3b65fa511d27858b050b7dd7670506c291aec5
+Merge: aafc43c 49f727e
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Sep 17 12:58:40 2023 -0400
+
+    Merge pull request #1 from luisan08/search
+    
+    Add search to main.py
+
+commit aafc43c04f30b4609ad38166c8f8cdac7bcfabe6
+Author: Minh Uchiha <minhsalamander09@gmail.com>
+Date:   Sun Sep 17 06:30:51 2023 -0400
+
+    Added unit tests for login and option
+
+commit 49f727ea7f7d1be869aa4bba5312285c317c9c53
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sat Sep 16 15:40:16 2023 -0400
+
+    Add search to main.py
+
+commit 0abc11e2fd726024ceaee525749963618874b6b8
+Author: kaylrpalm <103464950+kaylrpalm@users.noreply.github.com>
+Date:   Sat Sep 16 04:28:54 2023 -0400
+
+    search
+    
+    Search bar options:
+    
+    look for jobs - print message that is “under construction”
+    
+    find someone you know - print message that is “under construction”
+    
+    skills - show a list of 5 skills - if user presses one skill, print message that is “under construction”
+
+commit c390570eff4674ba501d0884ae9f5e8655d83e46
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Fri Sep 15 00:13:03 2023 -0400
+
+    Welcome and Login #1
