@@ -125,20 +125,20 @@ def search():
     if not Config.FLAG:
             print("\nPlease log in to your account before searching for jobs")
             login.login()
-    print("\nSearch Options:\n1. Look for Jobs\n2. Find People You Know\n3. Learn a Skill\n4. Quit Search")
+    print("\nSearch Options:\n1. Look for Jobs\n2. Learn a Skill\n3. Quit Search")
     searchChoice = int(input("Please enter your desired search: "))
 
     while True: #input validation
         if searchChoice == 1: 
             jobSearch()
             break
+        #elif searchChoice == 2:
+            #peopleSearch()
+           #break
         elif searchChoice == 2:
-            peopleSearch()
-            break
-        elif searchChoice == 3:
             skillSearch()
             break
-        elif searchChoice == 4: # quit search
+        elif searchChoice == 3: # quit search
             break
         else: 
             # user can only enter valid option

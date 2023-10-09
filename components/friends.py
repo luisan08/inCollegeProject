@@ -129,7 +129,7 @@ def friends():
     
     notifications(Config.SYSTEM_ACCOUNT[2])
 
-    print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
+    #print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
     choice = None
     while True:  
         print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
