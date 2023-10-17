@@ -1,0 +1,25 @@
+{
+    "hieung": {
+        "title": "1",
+        "major": "1",
+        "university": "1",
+        "description": "1",
+        "experience": {
+            "experience0": {
+                "title": "1",
+                "employer": "1",
+                "date_start": "1",
+                "date_end": "1",
+                "location": "1",
+                "description": "1"
+            }
+        },
+        "education": {
+            "education0": {
+                "school": "1",
+                "degree": "1",
+                "year_attended": "1"
+            }
+        }
+    }
+}
