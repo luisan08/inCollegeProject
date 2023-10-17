@@ -10,25 +10,25 @@ def create_profile():
     university = input('University (such as University of California): ')
     description = input('Description (such as I am an aspiring SWE): ')
     num_of_experience = int(input('Number of Experiences you have: '))
-    experience = {}
+    experience = []
     for i in range(num_of_experience):
-        experienceID = 'experience' + str(i)
-        experience[experienceID] = {}
-        experience[experienceID]['title'] = input('Title of Experience: ')
-        experience[experienceID]['employer'] = input('Employer: ')
-        experience[experienceID]['date_start'] = input('Date Started: ')
-        experience[experienceID]['date_end'] = input('Date Ended: ')
-        experience[experienceID]['location'] = input('Location: ')
-        experience[experienceID]['description'] = input('Description: ')
+        new_experience = {}
+        new_experience['title'] = input('Title of Experience: ')
+        new_experience['employer'] = input('Employer: ')
+        new_experience['date_start'] = input('Date Started: ')
+        new_experience['date_end'] = input('Date Ended: ')
+        new_experience['location'] = input('Location: ')
+        new_experience['description'] = input('Description: ')
+        experience.append(new_experience)
 
     num_of_education = int(input('Number of Education you have: '))
-    education = {}
+    education = []
     for i in range(num_of_education):
-        educationID = 'education' + str(i)
-        education[educationID] = {}
-        education[educationID]['school'] = input('School: ')
-        education[educationID]['degree'] = input('Degree: ')
-        education[educationID]['year_attended'] = input('Year Attended: ')
+        new_education = {}
+        new_education['school'] = input('School: ')
+        new_education['degree'] = input('Degree: ')
+        new_education['year_attended'] = input('Year Attended: ')
+        education.append(new_education)
 
     # FOR DEMO ONLY
     SYSTEM_ACCOUNT = ['hieung']

@@ -1,25 +1,33 @@
 {
     "hieung": {
-        "title": "1",
-        "major": "1",
-        "university": "1",
-        "description": "1",
-        "experience": {
-            "experience0": {
-                "title": "1",
-                "employer": "1",
-                "date_start": "1",
-                "date_end": "1",
-                "location": "1",
-                "description": "1"
+        "title": "Computer Science Student",
+        "major": "computer engineering",
+        "university": "univeristy of south florida",
+        "description": "aspiring web developer",
+        "experience": [
+            {
+                "title": "web developer",
+                "employer": "apple",
+                "date_start": "10/10/2024",
+                "date_end": "10/20/2026",
+                "location": "florida",
+                "description": "develop a web"
+            },
+            {
+                "title": "software engineer",
+                "employer": "microsoft",
+                "date_start": "1/12/2021",
+                "date_end": "21/12/2023",
+                "location": "new york",
+                "description": "fix bug"
             }
-        },
-        "education": {
-            "education0": {
-                "school": "1",
-                "degree": "1",
-                "year_attended": "1"
+        ],
+        "education": [
+            {
+                "school": "university of south florida",
+                "degree": "bachelor",
+                "year_attended": "2021"
             }
-        }
+        ]
     }
 }
