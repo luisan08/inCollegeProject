@@ -3,6 +3,7 @@ import components.login as login
 import components.menu_helper as menu_helper
 import components.search as search
 import components.friends as friends
+import components.profile as profile
 import pandas as pd
 
 accounts = pd.read_csv('components/accounts.csv')
@@ -15,8 +16,9 @@ def display_groups_of_links():
     print("2. InCollege Important Links")
     print("3. Search for Jobs")
     print("4. Find people you know")
-    print("5. Sign up/Log in")
-    print("6. Exit menu")
+    print("5. Profile")
+    print("6. Sign up/Log in")
+    print("7. Exit menu")
 
 """Function to display useful links"""
 def display_useful_links():
@@ -169,9 +171,13 @@ def general_menu():
             friends.friends()
 
         elif choice == 5:
+            # When user choose inCollege for create profile and view profile
+            profile.profile()
+
+        elif choice == 6:
             # Option for login in
             login.login()
-        elif choice == 6:
+        elif choice == 7:
             # Exit menu
             break
         else:

@@ -1,5 +1,6 @@
 import json
 from components.config import Config
+from components import login
 import string
 
 def create_profile():
@@ -40,9 +41,7 @@ def create_profile():
         new_education['year_attended'] = input('Years Attended: ')
         education.append(new_education)
 
-    SYSTEM_ACCOUNT = ['user_profile']
-
-    username = SYSTEM_ACCOUNT[0]
+    username = Config.SYSTEM_ACCOUNT[0]
 
     profiles[username] = {}
     profiles[username]['title'] = title
@@ -84,7 +83,7 @@ def view_profile(username):
     else:
         print("You don't have a profile. Create one using 'create_profile'.")
 
-def view_friend_profile(username, friend_username):
+def view_friend_profile(friend_username):
     with open('components/profile.json', 'r') as f:
         profiles = json.load(f)
 
@@ -112,6 +111,34 @@ def view_friend_profile(username, friend_username):
     else:
         print("This friend does not have a profile.")
 
-if __name__ == "__main__":
-    create_profile("user_profile")  # Replace "user_profile" with the actual username of the user
-    view_profile("user_profile")
+def profile():
+    if not Config.FLAG:
+        print("\nPlease log in to your account before see your profile and friends' profile.")
+        login.login()
+        return
+
+    choice = None
+    while choice != 4:
+        print("\n1. View your profile\n2. View a friend's profile\n3. Create a profile\n4. Quit")
+        choice = int(input("Please enter your choice: "))
+        if choice == 1:
+            view_profile(Config.SYSTEM_ACCOUNT[0])
+        elif choice == 2:
+            with open('components/friendLists.json', 'r') as f:
+                friendlists = json.load(f)
+            print("Your friends are: ")
+            for user in friendlists:
+                if Config.SYSTEM_ACCOUNT[2] in user:
+                    user_id = friendlists.index(user)
+                    for i in range(len(user[Config.SYSTEM_ACCOUNT[2]]['friendList'])):
+                        print(f'{i}. {user[Config.SYSTEM_ACCOUNT[2]]["friendList"][i]}')
+            friend_choice = int(input("Enter the username of the friend whose profile you want to view: "))
+            friend_username = friendlists[user_id][Config.SYSTEM_ACCOUNT[2]]['friendList'][friend_choice]
+            view_friend_profile(friend_username)
+        elif choice == 3:
+            create_profile()
+        elif choice == 4:
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
