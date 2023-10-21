@@ -1,5 +1,5 @@
 import json
-from config import Config
+from components.config import Config
 import string
 
 def create_profile():
@@ -56,5 +56,62 @@ def create_profile():
     with open('components/profile.json', 'w') as f:
         json.dump(profiles, f, indent=4)
 
+def view_profile(username):
+    with open('components/profile.json', 'r') as f:
+        profiles = json.load(f)
 
-# create_profile()
+    if username in profiles:
+        user_profile = profiles[username]
+
+        print("\nUser Profile:")
+        print(f"Title: {user_profile['title']}")
+        print(f"Major: {user_profile['major']}")
+        print(f"University: {user_profile['university']}")
+        print(f"About: {user_profile['about']}")
+        print("\nExperiences:")
+        for exp in user_profile['experience']:
+            print(f"- Title: {exp['title']}")
+            print(f"  Employer: {exp['employer']}")
+            print(f"  Date Started: {exp['date_start']}")
+            print(f"  Date Ended: {exp['date_end']}")
+            print(f"  Location: {exp['location']}")
+            print(f"  Description: {exp['description']}")
+        print("\nEducation:")
+        for edu in user_profile['education']:
+            print(f"- School: {edu['school']}")
+            print(f"  Degree: {edu['degree']}")
+            print(f"  Year Attended: {edu['year_attended']}")
+    else:
+        print("You don't have a profile. Create one using 'create_profile'.")
+
+def view_friend_profile(username, friend_username):
+    with open('components/profile.json', 'r') as f:
+        profiles = json.load(f)
+
+    if friend_username in profiles:
+        friend_profile = profiles[friend_username]
+
+        print("\nFriend's Profile:")
+        print(f"Title: {friend_profile['title']}")
+        print(f"Major: {friend_profile['major']}")
+        print(f"University: {friend_profile['university']}")
+        print(f"About: {friend_profile['about']}")
+        print("\nExperiences:")
+        for exp in friend_profile['experience']:
+            print(f"- Title: {exp['title']}")
+            print(f"  Employer: {exp['employer']}")
+            print(f"  Date Started: {exp['date_start']}")
+            print(f"  Date Ended: {exp['date_end']}")
+            print(f"  Location: {exp['location']}")
+            print(f"  Description: {exp['description']}")
+        print("\nEducation:")
+        for edu in friend_profile['education']:
+            print(f"- School: {edu['school']}")
+            print(f"  Degree: {edu['degree']}")
+            print(f"  Year Attended: {edu['year_attended']}")
+    else:
+        print("This friend does not have a profile.")
+
+if __name__ == "__main__":
+    create_profile("user_profile")  # Replace "user_profile" with the actual username of the user
+    view_profile("user_profile")
