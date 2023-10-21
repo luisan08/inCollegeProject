@@ -1,32 +1,32 @@
 {
-    "hieung": {
-        "title": "Computer Science Student",
-        "major": "computer engineering",
-        "university": "univeristy of south florida",
-        "description": "aspiring web developer",
+    "user_profile": {
+        "title": "3rd Year Computer Science Student",
+        "major": "Computer Science",
+        "university": "University Of South Florida",
+        "about": "Aspiring developer.",
         "experience": [
             {
                 "title": "web developer",
                 "employer": "apple",
-                "date_start": "10/10/2024",
-                "date_end": "10/20/2026",
-                "location": "florida",
-                "description": "develop a web"
+                "date_start": "10/10/24",
+                "date_end": "10/20/26",
+                "location": "Florida",
+                "description": "Develop a website."
             },
             {
-                "title": "software engineer",
+                "title": "Software engineer",
                 "employer": "microsoft",
                 "date_start": "1/12/2021",
                 "date_end": "21/12/2023",
-                "location": "new york",
-                "description": "fix bug"
+                "location": "New York",
+                "description": "Bug fixes."
             }
         ],
         "education": [
             {
-                "school": "university of south florida",
-                "degree": "bachelor",
-                "year_attended": "2021"
+                "school": "University Of South Florida",
+                "degree": "Bachelor In Computer Science",
+                "year_attended": "2020"
             }
         ]
     }
