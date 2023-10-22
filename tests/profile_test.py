@@ -2,7 +2,6 @@ import json
 import pytest
 from unittest.mock import mock_open, patch
 from components.profile import create_profile, view_profile, view_friend_profile, profile
-from components.login import login
 
 
 #-------------------------------- view profile test --------------------------------
