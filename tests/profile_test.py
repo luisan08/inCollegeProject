@@ -76,7 +76,7 @@ Education:
 
     assert captured.out.strip() == expected_output.strip()
 
-
+"""
 def test_view_profile_non_existing_user(capsys):
     # Mock the 'open' function and the file content
     mock_data = {}
@@ -88,7 +88,7 @@ def test_view_profile_non_existing_user(capsys):
     expected_output = "You don't have a profile. Create one using 'create_profile'.\n"
     assert captured.out == expected_output
 
-"""
+
 
 #---------------------------view friend profile test ---------------------------------------
 
@@ -188,7 +188,32 @@ def test_create_profile_university(capsys):
         captured = capsys.readouterr()
         
     assert "University section updated successfully." in captured.out
+def test_create_profile_about(capsys):
+    mock_data = {}
+    with patch("builtins.open", new_callable=mock_open, read_data=json.dumps(mock_data)):
+        with patch("builtins.input", side_effect=["4", "This is my about section.", "7"]):
+            create_profile("user1")
+        captured = capsys.readouterr()
 
+    assert "About section updated successfully." in captured.out
+
+def test_create_profile_education(capsys):
+    mock_data = {}
+    with patch("builtins.open", new_callable=mock_open, read_data=json.dumps(mock_data)):
+        with patch("builtins.input", side_effect=["6", "2", "USF University", "MBA", "2017-2019", "MIT University", "Ph.D.", "2015-2017", "7"]):
+            create_profile("user1")
+        captured = capsys.readouterr()
+
+    assert "Education section updated successfully." in captured.out
+
+def test_create_profile_experience(capsys):
+    mock_data = {}
+    with patch("builtins.open", new_callable=mock_open, read_data=json.dumps(mock_data)):
+        with patch("builtins.input", side_effect=["5", "2", "Software Engineer", "Google", "2019", "2022", "Mountain View", "Worked on search algorithms.", "Data Analyst", "Facebook", "2017", "2019", "Menlo Park", "Analyzed user data.", "7"]):
+            create_profile("user1")
+        captured = capsys.readouterr()
+
+    assert "Experience section updated successfully." in captured.out
 
 
 #---------------------- view profile test -------------------------------
