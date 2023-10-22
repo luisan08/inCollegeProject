@@ -94,7 +94,7 @@ def view_profile(username):
 
         if 'experience' in user_profile:
             for exp in user_profile['experience']:
-                print(f"- Title: {exp['title']}")
+                print(f"  Title: {exp['title']}")
                 print(f"  Employer: {exp['employer']}")
                 print(f"  Date Started: {exp['date_start']}")
                 print(f"  Date Ended: {exp['date_end']}")
@@ -106,7 +106,7 @@ def view_profile(username):
         print("\nEducation:")
         if 'education' in user_profile:
             for edu in user_profile['education']:
-                print(f"- School: {edu['school']}")
+                print(f"  School: {edu['school']}")
                 print(f"  Degree: {edu['degree']}")
                 print(f"  Year Attended: {edu['year_attended']}")
         else:
@@ -130,7 +130,7 @@ def view_friend_profile(friend_username):
 
         if 'experience' in friend_profile:
             for exp in friend_profile['experience']:
-                print(f"- Title: {exp['title']}")
+                print(f"  Title: {exp['title']}")
                 print(f"  Employer: {exp['employer']}")
                 print(f"  Date Started: {exp['date_start']}")
                 print(f"  Date Ended: {exp['date_end']}")
@@ -142,7 +142,7 @@ def view_friend_profile(friend_username):
         print("\nEducation:")
         if 'education' in friend_profile:
             for edu in friend_profile['education']:
-                print(f"- School: {edu['school']}")
+                print(f"  School: {edu['school']}")
                 print(f"  Degree: {edu['degree']}")
                 print(f"  Year Attended: {edu['year_attended']}")
         else:
@@ -180,3 +180,5 @@ def profile():
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
+
+
