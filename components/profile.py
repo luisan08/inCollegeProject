@@ -113,23 +113,31 @@ def view_friend_profile(friend_username):
         friend_profile = profiles[friend_username]
 
         print("\nFriend's Profile:")
-        print(f"Title: {friend_profile['title']}")
-        print(f"Major: {friend_profile['major']}")
-        print(f"University: {friend_profile['university']}")
-        print(f"About: {friend_profile['about']}")
+        print(f"Title: {friend_profile.get('title', friend_profile.get('dafault'))}")
+        print(f"Major: {friend_profile.get('major', friend_profile.get('dafault'))}")
+        print(f"University: {friend_profile.get('university', friend_profile.get('dafault'))}")
+        print(f"About: {friend_profile.get('about', friend_profile.get('dafault'))}")
         print("\nExperiences:")
-        for exp in friend_profile['experience']:
-            print(f"- Title: {exp['title']}")
-            print(f"  Employer: {exp['employer']}")
-            print(f"  Date Started: {exp['date_start']}")
-            print(f"  Date Ended: {exp['date_end']}")
-            print(f"  Location: {exp['location']}")
-            print(f"  Description: {exp['description']}")
+
+        if 'experience' in friend_profile:
+            for exp in friend_profile['experience']:
+                print(f"- Title: {exp['title']}")
+                print(f"  Employer: {exp['employer']}")
+                print(f"  Date Started: {exp['date_start']}")
+                print(f"  Date Ended: {exp['date_end']}")
+                print(f"  Location: {exp['location']}")
+                print(f"  Description: {exp['description']}")
+        else:
+            print("No experiences provided.")
+
         print("\nEducation:")
-        for edu in friend_profile['education']:
-            print(f"- School: {edu['school']}")
-            print(f"  Degree: {edu['degree']}")
-            print(f"  Year Attended: {edu['year_attended']}")
+        if 'education' in friend_profile:
+            for edu in friend_profile['education']:
+                print(f"- School: {edu['school']}")
+                print(f"  Degree: {edu['degree']}")
+                print(f"  Year Attended: {edu['year_attended']}")
+        else:
+            print("No education information provided.")
     else:
         print("This friend does not have a profile.")
 
