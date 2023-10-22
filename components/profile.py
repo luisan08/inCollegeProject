@@ -83,25 +83,34 @@ def view_profile(username):
 
     if username in profiles:
         user_profile = profiles[username]
+   
 
-        print(f"\n{username}'s profile: ")
-        print(f"Title: {user_profile['title']}")
-        print(f"Major: {user_profile['major']}")
-        print(f"University: {user_profile['university']}")
-        print(f"About: {user_profile['about']}")
+        print(f"\n{username}'s Profile: ")
+        print(f"Title: {user_profile.get('title', user_profile.get('dafault'))}")
+        print(f"Major: {user_profile.get('major', user_profile.get('dafault'))}")
+        print(f"University: {user_profile.get('university', user_profile.get('dafault'))}")
+        print(f"About: {user_profile.get('about', user_profile.get('dafault'))}")
         print("\nExperiences:")
-        for exp in user_profile['experience']:
-            print(f"- Title: {exp['title']}")
-            print(f"  Employer: {exp['employer']}")
-            print(f"  Date Started: {exp['date_start']}")
-            print(f"  Date Ended: {exp['date_end']}")
-            print(f"  Location: {exp['location']}")
-            print(f"  Description: {exp['description']}")
+
+        if 'experience' in user_profile:
+            for exp in user_profile['experience']:
+                print(f"- Title: {exp['title']}")
+                print(f"  Employer: {exp['employer']}")
+                print(f"  Date Started: {exp['date_start']}")
+                print(f"  Date Ended: {exp['date_end']}")
+                print(f"  Location: {exp['location']}")
+                print(f"  Description: {exp['description']}")
+        else:
+            print("No experiences provided.")
+
         print("\nEducation:")
-        for edu in user_profile['education']:
-            print(f"- School: {edu['school']}")
-            print(f"  Degree: {edu['degree']}")
-            print(f"  Year Attended: {edu['year_attended']}")
+        if 'education' in user_profile:
+            for edu in user_profile['education']:
+                print(f"- School: {edu['school']}")
+                print(f"  Degree: {edu['degree']}")
+                print(f"  Year Attended: {edu['year_attended']}")
+        else:
+            print("No education information provided.")
     else:
         print("You don't have a profile. Create one using 'create_profile'.")
 
