@@ -182,7 +182,7 @@ def profile():
         print("\n1. View your profile\n2. Create/Update your profile\n3. View a friend's profile\n4. Quit")
         choice = int(input("Please enter your choice: "))
         if choice == 1:
-            view_profile(Config.SYSTEM_ACCOUNT[0])
+            view_profile(Config.SYSTEM_ACCOUNT[2])
         elif choice == 2:
             create_profile(Config.SYSTEM_ACCOUNT[2])
         elif choice == 3:
