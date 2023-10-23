@@ -102,9 +102,10 @@ def view_profile(username):
 
     if username in profiles:
         user_profile = profiles[username]
-   
 
-        print(f"\n{username}'s Profile: ")
+        name = find_name_by_username(username)   
+
+        print(f"\n{name}'s Profile: ")
         print(f"Title: {user_profile.get('title', user_profile.get('dafault'))}")
         print(f"Major: {user_profile.get('major', user_profile.get('dafault'))}")
         print(f"University: {user_profile.get('university', user_profile.get('dafault'))}")
@@ -140,9 +141,9 @@ def view_friend_profile(friend_username):
     if friend_username in profiles:
         friend_profile = profiles[friend_username]
 
-        name = find_name_by_username(friend_username)
 
-        print(f"" + name + "'s Profile:")
+
+        print(f"Friend's Profile:")
         print(f"Title: {friend_profile.get('title', friend_profile.get('dafault'))}")
         print(f"Major: {friend_profile.get('major', friend_profile.get('dafault'))}")
         print(f"University: {friend_profile.get('university', friend_profile.get('dafault'))}")
