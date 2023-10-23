@@ -1,8 +1,163 @@
+commit 48de8341d17013f90e3c2d603fcff9465a3a107a
+Merge: 5a24bb0 4f3c4a5
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 22 23:21:58 2023 -0400
+
+    102223 Nevada
+    
+    Epic Profile
+
+commit 4f3c4a5fabc1bfc851f21bebe3dcf70628846682
+Merge: 7ece934 dc14630
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 22 23:10:36 2023 -0400
+
+    Merge pull request #21 from luisan08/profile_issues
+    
+    Profile issues
+
+commit dc14630a6678bf31b86e9fb6c7a835cb25056d26
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 22:33:49 2023 -0400
+
+    Tests updated
+
+commit 555b70869c5f20dc12178a9c4963138e9f98e60f
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 22:28:25 2023 -0400
+
+    Final update
+
+commit d279a260b93c43ff1dfac659f3575d7ea38d7e15
+Merge: c473d84 e2d0151
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 22:27:23 2023 -0400
+
+    Merge pull request #20 from luisan08/profile-fixes
+    
+    fixes + friend's name shows on profile
+
+commit e2d01511d49baa0f57ef23aa974fa9af343580a9
+Author: kaylrpalm <103464950+kaylrpalm@users.noreply.github.com>
+Date:   Sun Oct 22 22:26:10 2023 -0400
+
+    fixes + friend's name shows on profile
+
+commit c473d84635045b6acece5729c572c8567bdf9e28
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 20:56:26 2023 -0400
+
+    tests updated
+
+commit cc0f0f08e78c0ea8298cf6ae5306df3d80ea050a
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 13:02:17 2023 -0400
+
+    Update profile_test.py
+
+commit fc05f7eea6a549b3f0715623d27064c15f6f6c24
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 12:22:03 2023 -0400
+
+    Update profile_test.py
+
+commit 1ef455ba6f3b9547ca91cee530fb8020d550af20
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 11:58:26 2023 -0400
+
+    New tests
+
+commit aa074cb024cef14dc988dce79a420cfad9ad7aed
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 01:51:34 2023 -0400
+
+    Update profile.py
+
+commit 67ccb533982e7f9d1f73e1924426a05dad155854
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 22 01:43:22 2023 -0400
+
+    Changes to profile and updated menu test
+
+commit 7ece934d0f9e5ca346bb04d79fd006e50c3bf1a5
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Oct 22 00:19:11 2023 -0400
+
+    Made changes into create_profile function so that a user can update its profile whenever it wants.
+
+commit cdddf8e3516b85fbe4a1d037a5ce3f6c6585f5b2
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sat Oct 21 18:22:48 2023 -0400
+
+    Update profile link to menu
+
+commit dec0d90bd53be9118543d918faeb9bd98eb233ba
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sat Oct 21 15:42:22 2023 -0400
+
+    Added functions view_profile and view_friend_profile
+
+commit 2f5224c24c17082fe9e34e6bd3d1b2654a059a78
+Author: kaylrpalm <103464950+kaylrpalm@users.noreply.github.com>
+Date:   Fri Oct 20 21:44:44 2023 -0400
+
+    Create profile
+    
+    Added limited experience and input validation, capitalization for majors, schools, etc.
+
+commit efec17d082ae47ebe6e8b58bd764fca5aeea4be9
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Tue Oct 17 08:50:31 2023 -0400
+
+    Update intuitive example and fix indent in login
+
+commit 5fc22a7c230197834bad1cc9aa2e997ad966bdd4
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Tue Oct 17 00:23:20 2023 -0400
+
+    Demo Profiles
+
+commit 5a24bb025904c8d1a264aeb92d0bc3e60d625df6
+Merge: 8c3fabd 2bfd991
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 8 22:12:35 2023 -0400
+
+    100823Nevada
+    
+    Changes to friends
+
+commit 2bfd9919963691f63f6c1ae61ff7547960f4f1e9
+Author: luisan08 <133046091+luisan08@users.noreply.github.com>
+Date:   Sun Oct 8 22:09:02 2023 -0400
+
+    Changes for menu/search
+
+commit c0cc2b26e7bfc855db1a57c5228c1ec8da147e93
+Author: NPatel-21 <142070922+NPatel-21@users.noreply.github.com>
+Date:   Sun Oct 8 17:02:31 2023 -0400
+
+    Removed one print statement to avoid duplication
+
+commit 427d857bd8486b8ba68651d8aeda3d84336c75bb
+Author: hieuminh65 <hieuminhnguyen@usf.edu>
+Date:   Sun Oct 8 15:49:51 2023 -0400
+
+    100823Nevada
+
 commit 90d032ec6a351c56642278f6cd460610fd6f146f
 Author: hieuminh65 <hieuminhnguyen@usf.edu>
 Date:   Sun Oct 8 15:49:18 2023 -0400
 
     100823Nevada
+
+commit 8c3fabd495a3b1a40fc69e62e986ec15e7badf2f
+Merge: 9753aae e412aed
+Author: Hieu Minh Nguyen <99923860+hieuminh65@users.noreply.github.com>
+Date:   Sun Oct 8 15:40:02 2023 -0400
+
+    Merge pull request from friends branch
+    
+    Friends module
 
 commit e412aedd09df307292e314065552fdbcd7201cf4
 Author: hieuminh65 <hieuminhnguyen@usf.edu>
