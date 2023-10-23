@@ -29,5 +29,10 @@
                 "year_attended": "2020"
             }
         ]
-    }
+    },
+    "luisa": {
+        "title": "Engineer Student",
+        "major": "Computer Science"
+    },
+    "Minh": {}
 }

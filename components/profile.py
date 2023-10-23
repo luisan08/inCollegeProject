@@ -2,6 +2,25 @@ import json
 from components.config import Config
 from components import login
 import string
+import pandas as pd
+
+ 
+
+def find_name_by_username(username):
+
+        # Load the pandas DataFrame from your file
+
+        df = pd.read_csv('components/accounts.csv')
+
+        if 'username' in df and 'first' in df:
+
+            result = df[df['username'] == username]
+
+            if not result.empty:
+
+                # Assuming 'Username' is unique, so there will be at most one match
+
+                return result['first'].values[0]
 
 def create_profile(username):
     with open('components/profile.json', 'r') as f:
@@ -84,24 +103,34 @@ def view_profile(username):
     if username in profiles:
         user_profile = profiles[username]
 
-        print(f"\n{username}'s profile: ")
-        print(f"Title: {user_profile['title']}")
-        print(f"Major: {user_profile['major']}")
-        print(f"University: {user_profile['university']}")
-        print(f"About: {user_profile['about']}")
+        name = find_name_by_username(username)   
+
+        print(f"\n{name}'s Profile: ")
+        print(f"Title: {user_profile.get('title', user_profile.get('dafault'))}")
+        print(f"Major: {user_profile.get('major', user_profile.get('dafault'))}")
+        print(f"University: {user_profile.get('university', user_profile.get('dafault'))}")
+        print(f"About: {user_profile.get('about', user_profile.get('dafault'))}")
         print("\nExperiences:")
-        for exp in user_profile['experience']:
-            print(f"- Title: {exp['title']}")
-            print(f"  Employer: {exp['employer']}")
-            print(f"  Date Started: {exp['date_start']}")
-            print(f"  Date Ended: {exp['date_end']}")
-            print(f"  Location: {exp['location']}")
-            print(f"  Description: {exp['description']}")
+
+        if 'experience' in user_profile:
+            for exp in user_profile['experience']:
+                print(f"  Title: {exp['title']}")
+                print(f"  Employer: {exp['employer']}")
+                print(f"  Date Started: {exp['date_start']}")
+                print(f"  Date Ended: {exp['date_end']}")
+                print(f"  Location: {exp['location']}")
+                print(f"  Description: {exp['description']}")
+        else:
+            print("No experiences provided.")
+
         print("\nEducation:")
-        for edu in user_profile['education']:
-            print(f"- School: {edu['school']}")
-            print(f"  Degree: {edu['degree']}")
-            print(f"  Year Attended: {edu['year_attended']}")
+        if 'education' in user_profile:
+            for edu in user_profile['education']:
+                print(f"  School: {edu['school']}")
+                print(f"  Degree: {edu['degree']}")
+                print(f"  Year Attended: {edu['year_attended']}")
+        else:
+            print("No education information provided.")
     else:
         print("You don't have a profile. Create one using 'create_profile'.")
 
@@ -112,24 +141,34 @@ def view_friend_profile(friend_username):
     if friend_username in profiles:
         friend_profile = profiles[friend_username]
 
-        print("\nFriend's Profile:")
-        print(f"Title: {friend_profile['title']}")
-        print(f"Major: {friend_profile['major']}")
-        print(f"University: {friend_profile['university']}")
-        print(f"About: {friend_profile['about']}")
+
+
+        print(f"Friend's Profile:")
+        print(f"Title: {friend_profile.get('title', friend_profile.get('dafault'))}")
+        print(f"Major: {friend_profile.get('major', friend_profile.get('dafault'))}")
+        print(f"University: {friend_profile.get('university', friend_profile.get('dafault'))}")
+        print(f"About: {friend_profile.get('about', friend_profile.get('dafault'))}")
         print("\nExperiences:")
-        for exp in friend_profile['experience']:
-            print(f"- Title: {exp['title']}")
-            print(f"  Employer: {exp['employer']}")
-            print(f"  Date Started: {exp['date_start']}")
-            print(f"  Date Ended: {exp['date_end']}")
-            print(f"  Location: {exp['location']}")
-            print(f"  Description: {exp['description']}")
+
+        if 'experience' in friend_profile:
+            for exp in friend_profile['experience']:
+                print(f"  Title: {exp['title']}")
+                print(f"  Employer: {exp['employer']}")
+                print(f"  Date Started: {exp['date_start']}")
+                print(f"  Date Ended: {exp['date_end']}")
+                print(f"  Location: {exp['location']}")
+                print(f"  Description: {exp['description']}")
+        else:
+            print("No experiences provided.")
+
         print("\nEducation:")
-        for edu in friend_profile['education']:
-            print(f"- School: {edu['school']}")
-            print(f"  Degree: {edu['degree']}")
-            print(f"  Year Attended: {edu['year_attended']}")
+        if 'education' in friend_profile:
+            for edu in friend_profile['education']:
+                print(f"  School: {edu['school']}")
+                print(f"  Degree: {edu['degree']}")
+                print(f"  Year Attended: {edu['year_attended']}")
+        else:
+            print("No education information provided.")
     else:
         print("This friend does not have a profile.")
 
@@ -144,9 +183,9 @@ def profile():
         print("\n1. View your profile\n2. Create/Update your profile\n3. View a friend's profile\n4. Quit")
         choice = int(input("Please enter your choice: "))
         if choice == 1:
-            view_profile(Config.SYSTEM_ACCOUNT[0])
+            view_profile(Config.SYSTEM_ACCOUNT[2])
         elif choice == 2:
-            create_profile(Config.SYSTEM_ACCOUNT[0])
+            create_profile(Config.SYSTEM_ACCOUNT[2])
         elif choice == 3:
             with open('components/friendLists.json', 'r') as f:
                 friendlists = json.load(f)
@@ -163,3 +202,5 @@ def profile():
             break
         else:
             print("Invalid choice. Please enter a number between 1 and 4.")
+
+
