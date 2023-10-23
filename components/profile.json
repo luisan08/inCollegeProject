@@ -1,0 +1,38 @@
+{
+    "user_profile": {
+        "title": "3rd Year Computer Science Student",
+        "major": "Computer Science",
+        "university": "University Of South Florida",
+        "about": "Aspiring developer.",
+        "experience": [
+            {
+                "title": "web developer",
+                "employer": "apple",
+                "date_start": "10/10/24",
+                "date_end": "10/20/26",
+                "location": "Florida",
+                "description": "Develop a website."
+            },
+            {
+                "title": "Software engineer",
+                "employer": "microsoft",
+                "date_start": "1/12/2021",
+                "date_end": "21/12/2023",
+                "location": "New York",
+                "description": "Bug fixes."
+            }
+        ],
+        "education": [
+            {
+                "school": "University Of South Florida",
+                "degree": "Bachelor In Computer Science",
+                "year_attended": "2020"
+            }
+        ]
+    },
+    "luisa": {
+        "title": "Engineer Student",
+        "major": "Computer Science"
+    },
+    "Minh": {}
+}

@@ -99,7 +99,7 @@ def create_new_account():
     newList = {username: {'friendList': friendList, 'pendingRequest': pendingRequest}}
     friendLists.append(newList)
     with open('components/friendLists.json', 'w') as f:
-        json.dump(friendLists, f)
+        json.dump(friendLists, f, indent=4)
 
     newAccount_controls = {'language': 'English', 'sms': True, 'email': True, 'advertising': True, 'first': first, 'last': last}
 
