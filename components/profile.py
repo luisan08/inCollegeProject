@@ -2,6 +2,25 @@ import json
 from components.config import Config
 from components import login
 import string
+import pandas as pd
+
+ 
+
+def find_name_by_username(username):
+
+        # Load the pandas DataFrame from your file
+
+        df = pd.read_csv('components/accounts.csv')
+
+        if 'username' in df and 'first' in df:
+
+            result = df[df['username'] == username]
+
+            if not result.empty:
+
+                # Assuming 'Username' is unique, so there will be at most one match
+
+                return result['first'].values[0]
 
 def create_profile(username):
     with open('components/profile.json', 'r') as f:
@@ -121,7 +140,9 @@ def view_friend_profile(friend_username):
     if friend_username in profiles:
         friend_profile = profiles[friend_username]
 
-        print("\nFriend's Profile:")
+        name = find_name_by_username(friend_username)
+
+        print(f"" + name + "'s Profile:")
         print(f"Title: {friend_profile.get('title', friend_profile.get('dafault'))}")
         print(f"Major: {friend_profile.get('major', friend_profile.get('dafault'))}")
         print(f"University: {friend_profile.get('university', friend_profile.get('dafault'))}")
@@ -163,7 +184,7 @@ def profile():
         if choice == 1:
             view_profile(Config.SYSTEM_ACCOUNT[0])
         elif choice == 2:
-            create_profile(Config.SYSTEM_ACCOUNT[0])
+            create_profile(Config.SYSTEM_ACCOUNT[2])
         elif choice == 3:
             with open('components/friendLists.json', 'r') as f:
                 friendlists = json.load(f)
