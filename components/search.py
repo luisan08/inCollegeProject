@@ -6,19 +6,32 @@ accounts = pd.read_csv('components/accounts.csv')
 accounts_jobs = pd.read_csv('components/accounts_jobs.csv')
 
 #jobSearch allows user to search for jobs
-def jobPosting_attempts(attempts = 5):
+def jobPosting_attempts(attempts = 10):
     return len(accounts_jobs) >= attempts
+
+#def list_jobs(user_first_name):   
+#    user_jobs = accounts_jobs[accounts_jobs['first'] == user_first_name]
+
+#    if user_jobs.empty:
+#        print("You have not posted any jobs")
+#    else:
+#        print("Your jobs are: ")
+#        print(user_jobs[['Title', 'Description']])
+#    print()    
 
 def jobSearch():
 
     global accounts 
     global accounts_jobs
 
+    #user_first_name = Config.SYSTEM_ACCOUNT[0]
+
     while True:
         print("Welcome to the Job Search! Choose a number for the options below")
         print("1. Post a Job")
-        print("2. Return to Job Search")
-        
+        print("2. Delete a Job")
+        print("3. Return to Job Search")
+
         option = int(input("Select your option:"))
 
         if option == 1:
@@ -54,6 +67,18 @@ def jobSearch():
             print("\n")
 
         elif option == 2:
+            
+            job_to_delete = input("Enter the job title to be deleted? ")
+
+            if job_to_delete in accounts_jobs['Title'].values:
+                accounts_jobs = accounts_jobs[accounts_jobs['Title']!= job_to_delete]
+                accounts_jobs.to_csv('components/accounts_jobs.csv', index=False)
+                print(f"The job {job_to_delete} has been deleted.")
+            
+            else:
+                print(f"The job {job_to_delete} was not found.")
+
+        elif option == 3:
             print("Returning to Job Search.")
             break
 
@@ -86,7 +111,7 @@ def peopleSearch():
             break 
 
         else:
-            print("Invalid option. Returning to People Search.") 
+            print("Invalid option. Returning to People Search.")
 
 
 #skillSearch allows users to choose to learn a skill from a list
@@ -132,9 +157,6 @@ def search():
         if searchChoice == 1: 
             jobSearch()
             break
-        #elif searchChoice == 2:
-            #peopleSearch()
-           #break
         elif searchChoice == 2:
             skillSearch()
             break
