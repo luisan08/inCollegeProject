@@ -14,7 +14,7 @@ accounts_controls = pd.read_csv('components/accounts_controls.csv')
 def display_groups_of_links():
     print("\n1. Useful Links")
     print("2. InCollege Important Links")
-    print("3. Search for Jobs")
+    print("3. Jobs/Skills options")
     print("4. Find people you know")
     print("5. Profile")
     print("6. Sign up/Log in")
@@ -182,7 +182,3 @@ def general_menu():
             break
         else:
             print("Invalid choice. Please try again.")
-        
-
-
-
