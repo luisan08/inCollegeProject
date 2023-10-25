@@ -11,6 +11,19 @@ with open('components/jobs.json', 'r') as f:
 def jobPosting_attempts(attempts = 10):
     return len(jobs) >= attempts
 
+def send_notification(applicants, job_id, job_title):
+    with open('components/profile.json', 'r') as f:
+        profiles = json.load(f)
+    for applicant in applicants:
+        if applicant['username'] in profiles:
+            profiles[applicant['username']]['jobDelete_noti'].append((job_id, job_title))
+        else:
+            profiles[applicant['username']] = {}
+            profiles[applicant['username']]['jobDelete_noti'] = [(job_id, job_title)]
+    with open('components/profile.json', 'w') as f:
+        json.dump(profiles, f, indent=4)
+    return
+
 def jobSearch():
 
     global accounts 
@@ -72,8 +85,10 @@ def jobSearch():
                 for job in jobs:
                     if Config.SYSTEM_ACCOUNT[2] == job['username'] and job['Title'] == job_postings[choice]['Title']:
                         jobs.remove(job)
+                        send_notification(job['Applicants'], job['job_id'], job['Title'])
                         print("You have successfully deleted a job!\n")    
                         break
+        
         elif option == 3:
             print("Returning to Job Search.")
             break
@@ -87,22 +102,24 @@ def applyJob():
         return
     for job in jobs:
         print('--------------------------------------------------')
-        if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
-            print(f"{job['job_id']}. {job['Title']} (Applied)")
-        else:
-            print(f"{job['job_id']}. {job['Title']}")
-        print(f"Description: {job['Description']}")
-        print(f"Employer: {job['Employer']}")
-        print(f"Location: {job['Location']}")
-        print(f"Salary: {job['Salary']}")
-        print('--------------------------------------------------')
+        for applicant in job['Applicants']:
+            if Config.SYSTEM_ACCOUNT[2] == applicant['username']:
+                print(f"{job['job_id']}. {job['Title']} (Applied)")
+            else:
+                print(f"{job['job_id']}. {job['Title']}")
+            print(f"Description: {job['Description']}")
+            print(f"Employer: {job['Employer']}")
+            print(f"Location: {job['Location']}")
+            print(f"Salary: {job['Salary']}")
+            print('--------------------------------------------------')
         
     choice = int(input("Select a job to apply for: "))
     for job in jobs:
         if job['job_id'] == choice:
-            if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
-                print("You have already applied for this job.\n")
-                return
+            for applicant in job['Applicants']:
+                if Config.SYSTEM_ACCOUNT[2] == applicant['username']:
+                    print("You have already applied for this job.\n")
+                    return
             if job['username'] == Config.SYSTEM_ACCOUNT[2]:
                 print("You cannot apply for your own job.\n")
                 return
@@ -118,33 +135,108 @@ def applyJob():
             return
 
 def saveJob():
-    pass
-    # for job in jobs:
-    #     print('--------------------------------------------------')
-    #     if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
-    #         print(f"{job['job_id']}. {job['Title']} (Saved)")
-    #     else:
-    #         print(f"{job['job_id']}. {job['Title']}")
-    #     print(f"Description: {job['Description']}")
-    #     print(f"Employer: {job['Employer']}")
-    #     print(f"Location: {job['Location']}")
-    #     print(f"Salary: {job['Salary']}")
-    #     print('--------------------------------------------------')
-        
-    # choice = int(input("Select a job to save: "))
-    # for job in jobs:
-    #     if job['job_id'] == choice:
-    #         if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
-    #             print("You have already saved this job.\n")
-    #             return
-    #         if job['username'] == Config.SYSTEM_ACCOUNT[2]:
-    #             print("You cannot save your own job.\n")
-    #             return
-    #         job['Applicants'].append(Config.SYSTEM_ACCOUNT[2])
-    #         print("You have successfully saved a job!\n")    
-    #         with open('components/jobs.json', 'w') as f:
-    #             json.dump(jobs, f, indent=4)
-    #         return
+    if len(jobs) == 0:
+        print("There are no jobs available to apply for.\n")
+        return
+    with open('components/profile.json', 'r') as f:
+        profiles = json.load(f)
+    if Config.SYSTEM_ACCOUNT[2] not in profiles:
+        profiles[Config.SYSTEM_ACCOUNT[2]] = {}
+        profiles[Config.SYSTEM_ACCOUNT[2]]['SavedJobs'] = []
+        with open('components/profile.json', 'w') as f:
+            json.dump(profiles, f, indent=4)
+    for job in jobs:
+        print('--------------------------------------------------')
+        if job['job_id'] in profiles[Config.SYSTEM_ACCOUNT[2]]['SavedJobs']:
+            print(f"{job['job_id']}. {job['Title']} (Saved)")
+        else:
+            print(f"{job['job_id']}. {job['Title']}")
+        print(f"Description: {job['Description']}")
+        print(f"Employer: {job['Employer']}")
+        print(f"Location: {job['Location']}")
+        print(f"Salary: {job['Salary']}")
+        print('--------------------------------------------------')
+    
+    choice = int(input("Select a job to save: "))
+    for job in jobs:
+        if job['job_id'] == choice:
+            if job['job_id'] in profiles[Config.SYSTEM_ACCOUNT[2]]['SavedJobs']:
+                print("You have already saved this job.\n")
+                return
+            if job['username'] == Config.SYSTEM_ACCOUNT[2]:
+                print("You cannot save your own job.\n")
+                return
+            profiles[Config.SYSTEM_ACCOUNT[2]]['SavedJobs'].append(job['job_id'])
+            print("You have successfully saved a job!\n")    
+            with open('components/profile.json', 'w') as f:
+                json.dump(profiles, f, indent=4)
+            return
+
+def job_applied():
+    if len(jobs) == 0:
+        print("There are no jobs available to apply for.\n")
+        return
+    applied = False
+
+    for job in jobs:
+        for applicant in job['Applicants']:
+            if Config.SYSTEM_ACCOUNT[2] == applicant['username']:
+                applied = True
+                print('--------------------------------------------------')
+                print(f"{job['job_id']}. {job['Title']}")
+                print(f"Description: {job['Description']}")
+                print(f"Employer: {job['Employer']}")
+                print(f"Location: {job['Location']}")
+                print(f"Salary: {job['Salary']}")
+                print('--------------------------------------------------')
+    if not applied:
+        print("You have not applied to any jobs.\n")
+        return
+    return
+
+def job_not_applied():
+    if len(jobs) == 0:
+        print("There are no jobs available to apply for.\n")
+        return
+    not_applied = False
+
+    for job in jobs:
+        if Config.SYSTEM_ACCOUNT[2] not in [applicant['username'] for applicant in job['Applicants']]:
+            not_applied = True
+            print('--------------------------------------------------')
+            print(f"{job['job_id']}. {job['Title']}")
+            print(f"Description: {job['Description']}")
+            print(f"Employer: {job['Employer']}")
+            print(f"Location: {job['Location']}")
+            print(f"Salary: {job['Salary']}")
+            print('--------------------------------------------------')
+    if not not_applied:
+        print("You have applied to all jobs.\n")
+        return
+    return
+
+def job_saved():
+    with open('components/profile.json', 'r') as f:
+        profiles = json.load(f)
+    if Config.SYSTEM_ACCOUNT[2] not in profiles:
+        print("You have not saved any jobs.\n")
+        return
+    saved = False
+
+    for job in jobs:
+        if job['job_id'] in profiles[Config.SYSTEM_ACCOUNT[2]]['SavedJobs']:
+            saved = True
+            print('--------------------------------------------------')
+            print(f"{job['job_id']}. {job['Title']}")
+            print(f"Description: {job['Description']}")
+            print(f"Employer: {job['Employer']}")
+            print(f"Location: {job['Location']}")
+            print(f"Salary: {job['Salary']}")
+            print('--------------------------------------------------')
+    if not saved:
+        print("You have not saved any jobs.\n")
+        return
+    return
 
 def skillSearch():
     print("Welcome to Skill Learner! Which skill are you interested in learning?")
@@ -182,19 +274,36 @@ def search():
             print("\nPlease log in to your account before searching for jobs")
             login.login()
             return
+    
+    with open('components/profile.json', 'r') as f:
+        profiles = json.load(f)
+    
+    if Config.SYSTEM_ACCOUNT[2] in profiles and 'jobDelete_noti' in profiles[Config.SYSTEM_ACCOUNT[2]]:
+        print(f"You have {len(profiles[Config.SYSTEM_ACCOUNT[2]]['jobDelete_noti'])} job(s) that have been deleted:")
+        for job_id, job_title in profiles[Config.SYSTEM_ACCOUNT[2]]['jobDelete_noti']:
+            print(f"  {job_id}. {job_title}")
+        profiles[Config.SYSTEM_ACCOUNT[2]]['jobDelete_noti'] = []
+        with open('components/profile.json', 'w') as f:
+            json.dump(profiles, f, indent=4)
 
     while True: #input validation
-        print("\nSearch Options:\n1. Post/Delete Jobs\n2. Apply/Save Jobs\n3. Learn a Skill\n3. Quit Search")
+        print("\nSearch Options:\n1. Post/Delete Jobs\n2. Apply/Save Jobs\n3. Learn a Skill\n4. Quit Search")
         searchChoice = int(input("Please enter your desired search: "))
         if searchChoice == 1: 
             jobSearch()
         elif searchChoice == 2:
-            print("1. Apply for a job\n2. Save a job\n3. Return to Job Search")
+            print("1. Apply for a job\n2. Save a job\n3. See all jobs you have apply to\n4. See all jobs you have not applied to\n5. See all jobs you saved\n6. Return to Job Search")
             choice = int(input("Select your option: "))
             if choice == 1:
                 applyJob()
             elif choice == 2:
                 saveJob()
+            elif choice == 3:
+                job_applied()
+            elif choice == 4:
+                job_not_applied()
+            elif choice == 5:
+                job_saved()
             else:
                 print("Invalid option. Please try again.")
         elif searchChoice == 3:
