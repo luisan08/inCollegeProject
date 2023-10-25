@@ -1,25 +1,28 @@
 import pandas as pd
+import numpy as np
+import json
 from components.config import Config
 import components.login as login
 
 accounts = pd.read_csv('components/accounts.csv')
-accounts_jobs = pd.read_csv('components/accounts_jobs.csv')
+with open('components/jobs.json', 'r') as f:
+    jobs = json.load(f)
 
-#jobSearch allows user to search for jobs
-def jobPosting_attempts(attempts = 5):
-    return len(accounts_jobs) >= attempts
+def jobPosting_attempts(attempts = 10):
+    return len(jobs) >= attempts
 
 def jobSearch():
 
     global accounts 
-    global accounts_jobs
+    global jobs
 
     while True:
         print("Welcome to the Job Search! Choose a number for the options below")
         print("1. Post a Job")
-        print("2. Return to Job Search")
+        print("2. Delete a Job")
+        print("3. Return to Job Search")
         
-        option = int(input("Select your option:"))
+        option = int(input("Select your option: "))
 
         if option == 1:
 
@@ -34,62 +37,115 @@ def jobSearch():
             jobLocation = input("Location: ")
             jobSalary = input("Salary: ")
 
-            account = Config.SYSTEM_ACCOUNT or ['Default First Name', 'Default Last Name']
-
+            username = Config.SYSTEM_ACCOUNT[2]
+            job_id = np.random.randint(0, 100)
+            while job_id in jobs:
+                job_id = np.random.randint(0, 100)
             jobPosting = {
-                'Title': [jobTitle],
-                'Description': [jobDescription],
-                'Employer': [jobEmployer],
-                'Location': [jobLocation],
-                'Salary': [jobSalary],
-                'First': account[0],
-                'Last': account[1]
+                'job_id' : job_id,
+                'username': username,
+                'Title': jobTitle,
+                'Description': jobDescription,
+                'Employer': jobEmployer,
+                'Location': jobLocation,
+                'Salary': jobSalary,
+                'Applicants': []
             }
 
-            jobPosting = pd.DataFrame(jobPosting, index=[0])
-            accounts_jobs = pd.concat([accounts_jobs, jobPosting], ignore_index=True)
-            accounts_jobs.to_csv('components/accounts_jobs.csv', index=False)
-            
+            jobs.append(jobPosting)
+            with open('components/jobs.json', 'w') as f:
+                json.dump(jobs, f, indent=4)
+
             print("You have successfully posted a job!")    
-            print("\n")
 
         elif option == 2:
+            job_postings = []
+            for job in jobs:
+                if Config.SYSTEM_ACCOUNT[2] == job['username']:
+                    job_postings.append(job)
+            if len(job_postings) == 0:
+                print("You have not posted any jobs.\n")
+            else:
+                for i, job in enumerate(job_postings):
+                    print(f"{i}. {job['Title']}")
+                choice = int(input("Select a job to delete: "))
+                for job in jobs:
+                    if Config.SYSTEM_ACCOUNT[2] == job['username'] and job['Title'] == job_postings[choice]['Title']:
+                        jobs.remove(job)
+                        print("You have successfully deleted a job!\n")    
+                        break
+        elif option == 3:
             print("Returning to Job Search.")
             break
 
         else:
             print("Invalid option. Please try again.")
 
-#peopleSearch allows people to find people they know
-def peopleSearch():
-
-    global accounts 
-    while True:
-        print("Find people you know! Choose a number for the options below")
-        print("1. Search for people ")
-        print("2. Return to People Search")
-        option = int(input("Select your option:"))
-    
-        if(option == 1):
-
-            first = input("Enter the first name: ")
-            last = input("Enter the last name: ")
-     
-            if (first, last) in zip(accounts['first'], accounts['last']):
-                print("Would you like to connect with", first, last, "?")
-            else:
-                print("Username was not found.")
-                print("\n")
-        
-        elif option == 2:
-            print("Returning to People Search.")
-            break 
-
+def applyJob():
+    if len(jobs) == 0:
+        print("There are no jobs available to apply for.\n")
+        return
+    for job in jobs:
+        print('--------------------------------------------------')
+        if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
+            print(f"{job['job_id']}. {job['Title']} (Applied)")
         else:
-            print("Invalid option. Returning to People Search.") 
+            print(f"{job['job_id']}. {job['Title']}")
+        print(f"Description: {job['Description']}")
+        print(f"Employer: {job['Employer']}")
+        print(f"Location: {job['Location']}")
+        print(f"Salary: {job['Salary']}")
+        print('--------------------------------------------------')
+        
+    choice = int(input("Select a job to apply for: "))
+    for job in jobs:
+        if job['job_id'] == choice:
+            if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
+                print("You have already applied for this job.\n")
+                return
+            if job['username'] == Config.SYSTEM_ACCOUNT[2]:
+                print("You cannot apply for your own job.\n")
+                return
+            application = {}
+            application['username'] = Config.SYSTEM_ACCOUNT[2]
+            application['graduation_date'] = input("Enter your graduation date (mm/dd/yyyy): ")
+            application['start_working_date'] = input("Enter a day you can start working (mm/dd/yyyy): ")
+            application['paragraph'] = input("Enter a paragraph why you are a good fit for this job: ")
+            job['Applicants'].append(application)
+            print("You have successfully applied for a job!\n")    
+            with open('components/jobs.json', 'w') as f:
+                json.dump(jobs, f, indent=4)
+            return
 
+def saveJob():
+    pass
+    # for job in jobs:
+    #     print('--------------------------------------------------')
+    #     if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
+    #         print(f"{job['job_id']}. {job['Title']} (Saved)")
+    #     else:
+    #         print(f"{job['job_id']}. {job['Title']}")
+    #     print(f"Description: {job['Description']}")
+    #     print(f"Employer: {job['Employer']}")
+    #     print(f"Location: {job['Location']}")
+    #     print(f"Salary: {job['Salary']}")
+    #     print('--------------------------------------------------')
+        
+    # choice = int(input("Select a job to save: "))
+    # for job in jobs:
+    #     if job['job_id'] == choice:
+    #         if Config.SYSTEM_ACCOUNT[2] in job['Applicants']:
+    #             print("You have already saved this job.\n")
+    #             return
+    #         if job['username'] == Config.SYSTEM_ACCOUNT[2]:
+    #             print("You cannot save your own job.\n")
+    #             return
+    #         job['Applicants'].append(Config.SYSTEM_ACCOUNT[2])
+    #         print("You have successfully saved a job!\n")    
+    #         with open('components/jobs.json', 'w') as f:
+    #             json.dump(jobs, f, indent=4)
+    #         return
 
-#skillSearch allows users to choose to learn a skill from a list
 def skillSearch():
     print("Welcome to Skill Learner! Which skill are you interested in learning?")
     # available skills are listed, skills are placeholders atm
@@ -125,23 +181,27 @@ def search():
     if not Config.FLAG:
             print("\nPlease log in to your account before searching for jobs")
             login.login()
-    print("\nSearch Options:\n1. Look for Jobs\n2. Learn a Skill\n3. Quit Search")
-    searchChoice = int(input("Please enter your desired search: "))
+            return
 
     while True: #input validation
+        print("\nSearch Options:\n1. Post/Delete Jobs\n2. Apply/Save Jobs\n3. Learn a Skill\n3. Quit Search")
+        searchChoice = int(input("Please enter your desired search: "))
         if searchChoice == 1: 
             jobSearch()
-            break
-        #elif searchChoice == 2:
-            #peopleSearch()
-           #break
         elif searchChoice == 2:
+            print("1. Apply for a job\n2. Save a job\n3. Return to Job Search")
+            choice = int(input("Select your option: "))
+            if choice == 1:
+                applyJob()
+            elif choice == 2:
+                saveJob()
+            else:
+                print("Invalid option. Please try again.")
+        elif searchChoice == 3:
             skillSearch()
-            break
-        elif searchChoice == 3: # quit search
+        elif searchChoice == 4: # quit search
             break
         else: 
-            # user can only enter valid option
-            searchChoice = int(input("Invalid choice. Please input a number corresponding with your desired search.\n"))
+            searchChoice = int(input("Invalid choice. Please input a number corresponding with your desired search."))
     return
         
