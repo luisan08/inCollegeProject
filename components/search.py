@@ -15,7 +15,7 @@ def send_notification(applicants, job_id, job_title):
     with open('components/profile.json', 'r') as f:
         profiles = json.load(f)
     for applicant in applicants:
-        if applicant['username'] in profiles:
+        if applicant['username'] in profiles and 'jobDelete_noti' in profiles[Config.SYSTEM_ACCOUNT[2]]:
             profiles[applicant['username']]['jobDelete_noti'].append((job_id, job_title))
         else:
             profiles[applicant['username']] = {}
@@ -292,7 +292,7 @@ def search():
         if searchChoice == 1: 
             jobSearch()
         elif searchChoice == 2:
-            print("1. Apply for a job\n2. Save a job\n3. See all jobs you have apply to\n4. See all jobs you have not applied to\n5. See all jobs you saved\n6. Return to Job Search")
+            print("1. Apply for a job\n2. Save a job\n3. See all jobs you have applied to\n4. See all jobs you have not applied to\n5. See saved jobs\n6. Return to Job Search")
             choice = int(input("Select your option: "))
             if choice == 1:
                 applyJob()
