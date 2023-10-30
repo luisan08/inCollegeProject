@@ -1,19 +1,46 @@
 [
     {
-        "job_id": 21,
-        "username": "hieung",
-        "Title": "software",
-        "Description": "develop",
-        "Employer": "code",
-        "Location": "apple",
-        "Salary": "tampa",
+        "job_id": 1,
+        "username": "MinhUchiha",
+        "Title": "Machine Learning Engineer",
+        "Description": "Develop ML Models",
+        "Employer": "Google Deepmind",
+        "Location": "Mountain View, CA",
+        "Salary": "600000",
+        "Applicants": [
+            {
+                "username": "NotMinhUchiha",
+                "graduation_date": "05/31/2025",
+                "start_working_date": "05/28/2023",
+                "paragraph": "I have experience being a ML Engineer at prestigious companies like Palantir and OpenAI"
+            }
+        ]
+    },
+    {
+        "job_id": 2,
+        "username": "Minh",
+        "Title": "Data Engineer",
+        "Description": "Work with MLOps",
+        "Employer": "OpenAI",
+        "Location": "San Jose, CA",
+        "Salary": "500000",
         "Applicants": [
             {
                 "username": "MinhUchiha",
-                "graduation_date": "sad",
-                "start_working_date": "ds",
-                "paragraph": "adsdaas"
+                "graduation_date": "05/31/2025",
+                "start_working_date": "05/28/2023",
+                "paragraph": "Bla Bla Bla..."
             }
         ]
+    },
+    {
+        "job_id": 3,
+        "username": "Uchiha",
+        "Title": "Senior Machine Learning Engineer",
+        "Description": "Develop ML Models",
+        "Employer": "Adobe Firefly",
+        "Location": "Lehi, Utah",
+        "Salary": "450000",
+        "Applicants": []
     }
 ]

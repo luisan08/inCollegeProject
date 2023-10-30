@@ -52,7 +52,7 @@ def jobSearch():
 
             username = Config.SYSTEM_ACCOUNT[2]
             job_id = np.random.randint(0, 100)
-            while job_id in jobs:
+            while any(job["job_id"] == job_id for job in jobs):
                 job_id = np.random.randint(0, 100)
             jobPosting = {
                 'job_id' : job_id,
@@ -102,16 +102,20 @@ def applyJob():
         return
     for job in jobs:
         print('--------------------------------------------------')
+        hasApplied = False
         for applicant in job['Applicants']:
             if Config.SYSTEM_ACCOUNT[2] == applicant['username']:
-                print(f"{job['job_id']}. {job['Title']} (Applied)")
-            else:
-                print(f"{job['job_id']}. {job['Title']}")
-            print(f"Description: {job['Description']}")
-            print(f"Employer: {job['Employer']}")
-            print(f"Location: {job['Location']}")
-            print(f"Salary: {job['Salary']}")
-            print('--------------------------------------------------')
+                hasApplied = True
+                break
+        if hasApplied:
+            print(f"{job['job_id']}. {job['Title']} (Applied)")
+        else:
+            print(f"{job['job_id']}. {job['Title']}")
+        print(f"Description: {job['Description']}")
+        print(f"Employer: {job['Employer']}")
+        print(f"Location: {job['Location']}")
+        print(f"Salary: {job['Salary']}")
+        print('--------------------------------------------------')
         
     choice = int(input("Select a job to apply for: "))
     for job in jobs:
