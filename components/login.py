@@ -88,9 +88,10 @@ def create_new_account():
     last = input("Please enter your last name: ")
     university = input("Please enter your university: ")
     major = input("Please enter your major: ")
+    tier = input("Please choose an option Standard (free) or Plus ($10/month): ")
     friendList = []
     pendingRequest = []
-    newAccount = {'username': username, 'password': password, 'first': first, 'last': last, 'university': university, 'major': major}
+    newAccount = {'username': username, 'password': password, 'first': first, 'last': last, 'university': university, 'major': major, 'tier':tier}
     
     newAccount = pd.DataFrame(newAccount, index=[0])
     accounts = pd.concat([accounts, newAccount], ignore_index=True)
