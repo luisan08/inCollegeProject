@@ -58,7 +58,7 @@ def process_request(friend, system_account):
         if system_account in user:
             user[system_account]['friendList'].append(friend)
     with open('components/friendLists.json', 'w') as f:
-            json.dump(friendLists, f)
+            json.dump(friendLists, f, indent=4)
 
 def notifications(username):
     for user in friendLists:
@@ -67,10 +67,10 @@ def notifications(username):
                 return
             else:
                 while True:
-                    print("You have pending requests from: ")
                     requests = user[username]['pendingRequest']
                     if not requests:
                         return
+                    print("You have pending requests from: ")
                     matching_accounts = accounts[accounts['username'].isin(requests)][['first', 'last']].reset_index(drop=True)
                     print(matching_accounts)
                     
