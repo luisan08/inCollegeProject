@@ -34,7 +34,11 @@
                 "XunThen"
             ],
             "pendingRequest": [],
-            "inbox": []
+            "inbox": [
+                {
+                    "XunThen": "Hello Hieu"
+                }
+            ]
         }
     }
 ]

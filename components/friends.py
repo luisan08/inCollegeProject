@@ -141,8 +141,9 @@ def notifications(username):
                         return
                     elif choice.isdigit():
                         choice = int(choice)
-
                         if choice >= 0 and choice < len(inbox):
+                            print(f'Message from {matching_accounts.iloc[choice]["first"]} {matching_accounts.iloc[choice]["last"]}: ')
+                            print(list(user[username]['inbox'][choice].values())[0])
                             c = int(input("Do you want to delete the message?\n1. Yes\n2. No\nPlease enter your choice: "))
                             if c == 1:
                                 user[username]['inbox'].remove(inbox[choice])
