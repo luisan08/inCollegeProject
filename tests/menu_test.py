@@ -23,7 +23,7 @@ def test_display_groups_of_links(capsys):
     assert "\n1. Useful Links" in captured.out
     assert "2. InCollege Important Links" in captured.out
     assert "3. Search for Jobs" in captured.out
-    assert "4. Find people you know" in captured.out
+    assert "4. Network" in captured.out
     assert "5. Profile" in captured.out
     assert "6. Sign up/Log in" in captured.out
     assert "7. Exit menu" in captured.out
