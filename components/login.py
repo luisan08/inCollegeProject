@@ -91,13 +91,14 @@ def create_new_account():
     tier = input("Please choose an option Standard (free) or Plus ($10/month): ")
     friendList = []
     pendingRequest = []
+    inbox = []
     newAccount = {'username': username, 'password': password, 'first': first, 'last': last, 'university': university, 'major': major, 'tier':tier}
     
     newAccount = pd.DataFrame(newAccount, index=[0])
     accounts = pd.concat([accounts, newAccount], ignore_index=True)
     accounts.to_csv('components/accounts.csv', index=False)
     print("You have successfully created an account!")
-    newList = {username: {'friendList': friendList, 'pendingRequest': pendingRequest}}
+    newList = {username: {'friendList': friendList, 'pendingRequest': pendingRequest, 'inbox': inbox}}
     friendLists.append(newList)
     with open('components/friendLists.json', 'w') as f:
         json.dump(friendLists, f, indent=4)

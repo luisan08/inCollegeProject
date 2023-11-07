@@ -1,1 +1,40 @@
-[{"MinhUchiha": {"friendList": ["XunThen", "luisa", "XunThen"], "pendingRequest": []}}, {"XunThen": {"friendList": ["MinhUchiha", "MinhUchiha"], "pendingRequest": []}}, {"luisa": {"friendList": ["MinhUchiha"], "pendingRequest": []}}, {"hieung": {"friendList": [], "pendingRequest": []}}]
+[
+    {
+        "MinhUchiha": {
+            "friendList": [
+                "luisa",
+                "XunThen"
+            ],
+            "pendingRequest": [],
+            "inbox": []
+        }
+    },
+    {
+        "XunThen": {
+            "friendList": [
+                "MinhUchiha",
+                "hieung"
+            ],
+            "pendingRequest": [],
+            "inbox": []
+        }
+    },
+    {
+        "luisa": {
+            "friendList": [
+                "MinhUchiha"
+            ],
+            "pendingRequest": [],
+            "inbox": []
+        }
+    },
+    {
+        "hieung": {
+            "friendList": [
+                "XunThen"
+            ],
+            "pendingRequest": [],
+            "inbox": []
+        }
+    }
+]
