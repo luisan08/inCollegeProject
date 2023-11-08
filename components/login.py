@@ -21,13 +21,12 @@ def in_InCollege_System():
         print("\nYou are not yet a part of the InCollege system yet.\n")
         return False
 
-def get_first_last_name_tier(username, password):  
+def get_first_last_name(username, password):  
     account_row = accounts[(accounts['username'] == username) & (accounts['password'] == password)]
     if not account_row.empty:
         first_name = account_row['first'].values[0]
         last_name = account_row['last'].values[0]
-        tier = account_row['tier'].values[0]
-        return first_name, last_name, tier
+        return first_name, last_name
     else:
         return None, None
 
@@ -38,8 +37,8 @@ def login_existing_account():
         password = input("Please enter your password: ")
         if (username, password) in zip(accounts['username'], accounts['password']):
             print("You have successfully logged in!")
-            first_name, last_name, tier =  get_first_last_name_tier(username, password)
-            Config.SYSTEM_ACCOUNT = (first_name, last_name, username, tier)
+            first_name, last_name =  get_first_last_name(username, password)
+            Config.SYSTEM_ACCOUNT = (first_name, last_name, username)
             Config.FLAG = True
             return False
         else:

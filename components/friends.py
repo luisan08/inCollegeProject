@@ -16,33 +16,18 @@ def send_request(username):
     return
 
 def send_message(username):
-
-    if Config.SYSTEM_ACCOUNT[3] == 'standard':
-        for user in friendLists:
-            if username in user:
-                if Config.SYSTEM_ACCOUNT[2] in user[username]['friendList']:
-                    message = input("Enter your message: ")
-                    user[username]['inbox'].append({Config.SYSTEM_ACCOUNT[2]: message})
-                    print("Message sent!")
-                    with open('components/friendLists.json', 'w') as f:
-                        json.dump(friendLists, f, indent=4)
-                    return
-                else:
-                    print("You are not friends with this person")
-                    return
-    
-
-    elif Config.SYSTEM_ACCOUNT[3] == 'plus':
-        for user in friendLists:
-            if username in user:
-                
-                    message = input("Enter your message: ")
-                    user[username]['inbox'].append({Config.SYSTEM_ACCOUNT[2]: message})
-                    print("Message sent!")
-                    with open('components/friendLists.json', 'w') as f:
-                        json.dump(friendLists, f, indent=4)
-                    return
-             
+    for user in friendLists:
+        if username in user:
+            if Config.SYSTEM_ACCOUNT[2] in user[username]['friendList']:
+                message = input("Enter your message: ")
+                user[username]['inbox'].append({Config.SYSTEM_ACCOUNT[2]: message})
+                print("Message sent!")
+                with open('components/friendLists.json', 'w') as f:
+                    json.dump(friendLists, f, indent=4)
+                return
+            else:
+                print("You are not friends with this person")
+                return
 
 def find_someone():
     last = input("Please enter the last name of the person you are looking for: ")
