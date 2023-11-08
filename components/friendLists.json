@@ -16,7 +16,11 @@
                 "hieung"
             ],
             "pendingRequest": [],
-            "inbox": []
+            "inbox": [
+                {
+                    "hieung": "Hi"
+                }
+            ]
         }
     },
     {
@@ -37,8 +41,18 @@
             "inbox": [
                 {
                     "XunThen": "Hello Hieu"
+                },
+                {
+                    "h": "hello hieuuu"
                 }
             ]
+        }
+    },
+    {
+        "h": {
+            "friendList": [],
+            "pendingRequest": [],
+            "inbox": []
         }
     }
 ]

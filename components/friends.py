@@ -18,7 +18,7 @@ def send_request(username):
 def send_message(username):
     for user in friendLists:
         if username in user:
-            if Config.SYSTEM_ACCOUNT[2] in user[username]['friendList']:
+            if Config.SYSTEM_ACCOUNT[2] in user[username]['friendList'] or Config.SYSTEM_ACCOUNT[3] == 'Plus':
                 message = input("Enter your message: ")
                 user[username]['inbox'].append({Config.SYSTEM_ACCOUNT[2]: message})
                 print("Message sent!")
@@ -131,10 +131,8 @@ def notifications(username):
                     print("You have messages from: ")
                     for i in inbox:
                         matching_accounts = accounts[accounts['username'].isin(list(i.keys()))][['first', 'last']].reset_index(drop=True)
-                    i = 0
-                    for account in matching_accounts.itertuples():
-                        print(f"{i}. {account.first} {account.last}")
-                        i += 1
+
+                    print(matching_accounts)
 
                     choice = input("Choose the message that you want to read or q to quit: ")
                     if choice == 'q':
@@ -144,8 +142,11 @@ def notifications(username):
                         if choice >= 0 and choice < len(inbox):
                             print(f'Message from {matching_accounts.iloc[choice]["first"]} {matching_accounts.iloc[choice]["last"]}: ')
                             print(list(user[username]['inbox'][choice].values())[0])
-                            c = int(input("Do you want to delete the message?\n1. Yes\n2. No\nPlease enter your choice: "))
+                            c = int(input("Do you want to check the message?\n1. Reply\n2. Delete from inbox\nPlease enter your choice: "))
                             if c == 1:
+                                send_message(list(user[username]['inbox'][choice].keys())[0])
+                                user[username]['inbox'].remove(inbox[choice])
+                            if c == 2:
                                 user[username]['inbox'].remove(inbox[choice])
                                 print("Message deleted!")
                                 with open('components/friendLists.json', 'w') as f:
@@ -165,6 +166,14 @@ def show_my_network(username):
                 for friend in my_network:
                     print(friend)
             return
+
+def show_all_people():
+    print("All people on InCollege: ")
+    all_people = accounts.loc[accounts['username'] != Config.SYSTEM_ACCOUNT[2]]
+    all_people = all_people[['username', 'first', 'last', 'university', 'major']].reset_index(drop=True)
+    print(all_people[['first', 'last', 'university', 'major']].reset_index(drop=True))
+
+    return all_people
 
 def disconnect(username, friend_to_disconnect):
     for user in friendLists:
@@ -193,7 +202,7 @@ def friends():
     #print("\nOptions:\n1. Find someone you know\n2. Show my network\n3. Quit Search")
     choice = None
     while True:  
-        print("\nOptions:\n1. Find/Message someone you know\n2. Show my network\n3. Quit Search")
+        print("\nOptions:\n1. Find/Message someone you know\n2. Show my network\n3. Show all people\n4. Quit Search")
         choice = int(input("Please enter your choice: "))
         if choice == 1:
             find_someone()
@@ -213,6 +222,23 @@ def friends():
                 else:
                     print("Invalid choice. Please enter 'd' or 'q'.")
         elif choice == 3:
+            if Config.SYSTEM_ACCOUNT[3] == 'Plus':
+                all_people = show_all_people()
+                action = input("Enter the number of the person you want to send message with or q to quit: ")
+                if action == 'q':
+                    break
+                elif action.isdigit():
+                    action = int(action)
+                    if action >= 0 and action < len(all_people):
+                        username = all_people.iloc[action]['username']
+                        send_message(username)
+                    else:
+                        print(f"Choice must be between 0 and {len(all_people)}")
+                else:
+                    action = input("Invalid choice. Please enter a valid choice: ")
+            else:
+                print("You must be a Plus member to view all people.")
+        elif choice == 4:
             break
         else:
             print("Invalid choice. Please enter a valid choice.")

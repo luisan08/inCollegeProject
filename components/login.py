@@ -90,6 +90,8 @@ def create_new_account():
     university = input("Please enter your university: ")
     major = input("Please enter your major: ")
     tier = input("Please choose an option Standard (free) or Plus ($10/month): ")
+    while tier != "Standard" and tier != "Plus":
+        tier = input("Please choose an option Standard (free) or Plus ($10/month): ")
     friendList = []
     pendingRequest = []
     inbox = []
