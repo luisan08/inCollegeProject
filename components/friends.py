@@ -17,6 +17,7 @@ def send_request(username):
 
 def send_message(username):
 
+    if Config.SYSTEM_ACCOUNT[3] == 'standard':
         for user in friendLists:
             if username in user:
                 if Config.SYSTEM_ACCOUNT[2] in user[username]['friendList']:
@@ -31,26 +32,17 @@ def send_message(username):
                     return
     
 
-def send_message_anyone(username):
-
-    accounts = pd.read_csv('components/accounts.csv')
-
-    
-    if username in accounts['username'].values:
-           
+    elif Config.SYSTEM_ACCOUNT[3] == 'plus':
         for user in friendLists:
-        
+            if username in user:
+                
                     message = input("Enter your message: ")
                     user[username]['inbox'].append({Config.SYSTEM_ACCOUNT[2]: message})
                     print("Message sent!")
-
                     with open('components/friendLists.json', 'w') as f:
                         json.dump(friendLists, f, indent=4)
                     return
-    else:
-        print("User not found.")
-        return
-
+             
 
 def find_someone():
     last = input("Please enter the last name of the person you are looking for: ")
@@ -98,11 +90,7 @@ def find_someone():
                     username = filtered_accounts.iloc[choice]['username']
                     first = filtered_accounts.iloc[choice]['First Name']
                     last = filtered_accounts.iloc[choice]['Last Name']
-
-                    if Config.SYSTEM_ACCOUNT[3] == 'standard':
-                        send_message(username)
-                    elif Config.SYSTEM_ACCOUNT[3] == 'plus':
-                        send_message_anyone(username)
+                    send_message(username)
                 else:
                     print(f"Choice must be between 0 and {len(filtered_accounts)}")
             else:
@@ -120,72 +108,66 @@ def process_request(friend, system_account):
             json.dump(friendLists, f, indent=4)
 
 def notifications(username):
+    for user in friendLists:
+        if username in user:
+            if not user[username]['pendingRequest'] and not user[username]['inbox']:
+                return
+            elif user[username]['pendingRequest']:
+                while True:
+                    requests = user[username]['pendingRequest']
+                    if not requests:
+                        return
+                    print("You have pending requests from: ")
+                    matching_accounts = accounts[accounts['username'].isin(requests)][['first', 'last']].reset_index(drop=True)
+                    print(matching_accounts)
+                    
+                    choice = input("Choose the request that you want to accept or deny or q to quit: ") 
+                    if choice == 'q':
+                        return
+                    elif choice.isdigit():
+                        choice = int(choice)
 
- 
-        for user in friendLists:
-            if username in user:
-                if not user[username]['pendingRequest'] and not user[username]['inbox']:
-                    return
-                elif user[username]['pendingRequest']:
-                    while True:
-                        requests = user[username]['pendingRequest']
-                        if not requests:
-                            return
-                        print("You have pending requests from: ")
-                        matching_accounts = accounts[accounts['username'].isin(requests)][['first', 'last']].reset_index(drop=True)
-                        print(matching_accounts)
-                        
-                        choice = input("Choose the request that you want to accept or deny or q to quit: ") 
-                        if choice == 'q':
-                            return
-                        elif choice.isdigit():
-                            choice = int(choice)
+                        if choice >= 0 and choice < len(requests):
+                            print("Do you want to add this person to your friend list?")
+                            c = int(input("\n1. Accept\n2. Deny\nPlease enter your choice: "))
+                            if c == 1:
+                                process_request(requests[choice], Config.SYSTEM_ACCOUNT[2])
 
-                            if choice >= 0 and choice < len(requests):
-                                print("Do you want to add this person to your friend list?")
-                                c = int(input("\n1. Accept\n2. Deny\nPlease enter your choice: "))
-                                if c == 1:
-                                    process_request(requests[choice], Config.SYSTEM_ACCOUNT[2])
+                            user[username]['pendingRequest'].remove(requests[choice])
+                            with open('components/friendLists.json', 'w') as f:
+                                json.dump(friendLists, f, indent=4)
+                        else:
+                            print(f"Choice must be between 0 and {len(requests)}")        
+            else:
+                while True:
+                    inbox = user[username]['inbox']
+                    if not inbox:
+                        return
+                    print("You have messages from: ")
+                    for i in inbox:
+                        matching_accounts = accounts[accounts['username'].isin(list(i.keys()))][['first', 'last']].reset_index(drop=True)
+                    i = 0
+                    for account in matching_accounts.itertuples():
+                        print(f"{i}. {account.first} {account.last}")
+                        i += 1
 
-                                user[username]['pendingRequest'].remove(requests[choice])
+                    choice = input("Choose the message that you want to read or q to quit: ")
+                    if choice == 'q':
+                        return
+                    elif choice.isdigit():
+                        choice = int(choice)
+                        if choice >= 0 and choice < len(inbox):
+                            print(f'Message from {matching_accounts.iloc[choice]["first"]} {matching_accounts.iloc[choice]["last"]}: ')
+                            print(list(user[username]['inbox'][choice].values())[0])
+                            c = int(input("Do you want to delete the message?\n1. Yes\n2. No\nPlease enter your choice: "))
+                            if c == 1:
+                                user[username]['inbox'].remove(inbox[choice])
+                                print("Message deleted!")
                                 with open('components/friendLists.json', 'w') as f:
                                     json.dump(friendLists, f, indent=4)
-                            else:
-                                print(f"Choice must be between 0 and {len(requests)}")        
-                else:
-                    while True:
-                        inbox = user[username]['inbox']
-                        if not inbox:
-                            return
-                        print("You have messages from: ")
-                        for i in inbox:
-                            matching_accounts = accounts[accounts['username'].isin(list(i.keys()))][['first', 'last']].reset_index(drop=True)
-                        i = 0
-                        for account in matching_accounts.itertuples():
-                            print(f"{i}. {account.first} {account.last}")
-                            i += 1
-
-                        choice = input("Choose the message that you want to read or q to quit: ")
-                        if choice == 'q':
-                            return
-                        elif choice.isdigit():
-                            choice = int(choice)
-                            if choice >= 0 and choice < len(inbox):
-                                print(f'Message from {matching_accounts.iloc[choice]["first"]} {matching_accounts.iloc[choice]["last"]}: ')
-                                print(list(user[username]['inbox'][choice].values())[0])
-                                c = int(input("Do you want to delete the message?\n1. Yes\n2. No\nPlease enter your choice: "))
-                                if c == 1:
-                                    user[username]['inbox'].remove(inbox[choice])
-                                    print("Message deleted!")
-                                    with open('components/friendLists.json', 'w') as f:
-                                        json.dump(friendLists, f, indent=4)
-                            else:
-                                print(f"Choice must be between 0 and {len(inbox)}")     
-
-            return
-
-   
-    
+                        else:
+                            print(f"Choice must be between 0 and {len(inbox)}")          
+    return
 
 def show_my_network(username):
     for user in friendLists:
