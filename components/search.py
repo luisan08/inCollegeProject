@@ -3,6 +3,7 @@ import numpy as np
 import json
 from components.config import Config
 import components.login as login
+import components.notifications as notifications
 
 accounts = pd.read_csv('components/accounts.csv')
 with open('components/jobs.json', 'r') as f:
@@ -289,6 +290,9 @@ def search():
         profiles[Config.SYSTEM_ACCOUNT[2]]['jobDelete_noti'] = []
         with open('components/profile.json', 'w') as f:
             json.dump(profiles, f, indent=4)
+    
+    notifications.notify_applied_jobs(Config.SYSTEM_ACCOUNT[2])
+
 
     while True: #input validation
         print("\nSearch Options:\n1. Post/Delete Jobs\n2. Apply/Save Jobs\n3. Learn a Skill\n4. Quit Search")

@@ -4,10 +4,13 @@ import components.menu_helper as menu_helper
 import components.search as search
 import components.friends as friends
 import components.profile as profile
+import components.notifications as notifications
 import pandas as pd
+import json
 
 accounts = pd.read_csv('components/accounts.csv')
 accounts_controls = pd.read_csv('components/accounts_controls.csv')
+
 
 # --------------------------Display Functions--------------------------
 """Function to display 2 groups of links"""
@@ -150,6 +153,8 @@ def general_link_selection(choice, isLogin = False):
 
 
 # --------------------------Main Function--------------------------
+
+
 def general_menu():
     while True:
         display_groups_of_links()
@@ -177,6 +182,9 @@ def general_menu():
         elif choice == 6:
             # Option for login in
             login.login()
+            if Config.FLAG == True:
+                        username = Config.SYSTEM_ACCOUNT[2]
+                        notifications.check_and_display_notifications(username)
         elif choice == 7:
             # Exit menu
             break
