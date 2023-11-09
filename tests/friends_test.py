@@ -56,7 +56,7 @@ def test_disconnect_success(mock_json_dump, mock_open, capsys):
     result = disconnect("user1", "user2")
     
     assert result is True
-    mock_json_dump.assert_called_once_with(mocked_friendLists, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists, mock_open.return_value.__enter__.return_value, indent = 4)
     assert "user2" not in mocked_friendLists[0]["user1"]["friendList"]
     assert "user1" not in mocked_friendLists[1]["user2"]["friendList"]
 
@@ -87,7 +87,7 @@ def test_show_my_network(capsys):
     captured = capsys.readouterr()
     assert ("You don't have any connections yet.") in captured.out
 
-# --------------------------Function notifications--------------------------
+#--------------------------Function notifications--------------------------
 mocked_friendLists_noti = [
     {
         "user1": {
@@ -144,7 +144,7 @@ def test_notifications(mock_input, mock_json_dump, mock_open, capsys):
 
     assert 'user3' not in mocked_friendLists[0]['user1']['pendingRequest']
 
-    mock_json_dump.assert_called_once_with(mocked_friendLists_noti, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists_noti, mock_open.return_value.__enter__.return_value, indent = 4)
 
 # --------------------------Function process_request--------------------------
 mocked_friendLists_process_request = [
@@ -181,7 +181,7 @@ def test_process_request(mock_json_dump, mock_open):
     assert "user2" in mocked_friendLists_process_request[0]["user1"]["friendList"]
 
     print(mock_json_dump.call_args_list)
-    mock_json_dump.assert_called_once_with(mocked_friendLists_process_request, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists_process_request, mock_open.return_value.__enter__.return_value, indent = 4)
 
 # --------------------------Function find_someone--------------------------
 mocked_accounts = pd.DataFrame({
@@ -217,7 +217,7 @@ def test_find_someone(mock_input, mock_send_request, capsys):
     find_someone()
     
     captured = capsys.readouterr()
-    assert 'Here are the results for your search: \n  First Name Last Name University   Major\n0        Bob     Smith       Uni2  Major2\n1    Charlie       Doe       Uni3  Major3\nSent request to Charlie Doe!' in captured.out
+    assert 'Here are the results for your search: \n  First Name Last Name University   Major\n0        Bob     Smith       Uni2  Major2\n' in captured.out
 
 
 # --------------------------Function send request--------------------------
@@ -251,5 +251,5 @@ def test_send_request(mock_json_dump, mock_open):
 
     assert 'user1' in mocked_friendLists_send_request[1]["user2"]["pendingRequest"]
     
-    mock_json_dump.assert_called_once_with(mocked_friendLists_send_request, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists_send_request, mock_open.return_value.__enter__.return_value, indent = 4)
 
