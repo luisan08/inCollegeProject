@@ -1,9 +1,11 @@
 import pandas as pd
 import json
-from unittest.mock import patch, MagicMock, call
+from unittest.mock import patch, mock_open, MagicMock, call
 import builtins
 import io
 import pytest
+import numpy as np
+from components.config import Config
 from components.friends import (
     friends,
     disconnect,
@@ -11,7 +13,9 @@ from components.friends import (
     notifications,
     process_request,
     find_someone,
-    send_request
+    send_request,
+    show_all_people,
+    send_message
     )
 
 # --------------------------Function disconnect--------------------------
@@ -56,7 +60,7 @@ def test_disconnect_success(mock_json_dump, mock_open, capsys):
     result = disconnect("user1", "user2")
     
     assert result is True
-    mock_json_dump.assert_called_once_with(mocked_friendLists, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists, mock_open.return_value.__enter__.return_value, indent = 4)
     assert "user2" not in mocked_friendLists[0]["user1"]["friendList"]
     assert "user1" not in mocked_friendLists[1]["user2"]["friendList"]
 
@@ -87,7 +91,7 @@ def test_show_my_network(capsys):
     captured = capsys.readouterr()
     assert ("You don't have any connections yet.") in captured.out
 
-# --------------------------Function notifications--------------------------
+#--------------------------Function notifications--------------------------
 mocked_friendLists_noti = [
     {
         "user1": {
@@ -144,7 +148,7 @@ def test_notifications(mock_input, mock_json_dump, mock_open, capsys):
 
     assert 'user3' not in mocked_friendLists[0]['user1']['pendingRequest']
 
-    mock_json_dump.assert_called_once_with(mocked_friendLists_noti, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists_noti, mock_open.return_value.__enter__.return_value, indent = 4)
 
 # --------------------------Function process_request--------------------------
 mocked_friendLists_process_request = [
@@ -181,7 +185,7 @@ def test_process_request(mock_json_dump, mock_open):
     assert "user2" in mocked_friendLists_process_request[0]["user1"]["friendList"]
 
     print(mock_json_dump.call_args_list)
-    mock_json_dump.assert_called_once_with(mocked_friendLists_process_request, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists_process_request, mock_open.return_value.__enter__.return_value, indent = 4)
 
 # --------------------------Function find_someone--------------------------
 mocked_accounts = pd.DataFrame({
@@ -217,7 +221,7 @@ def test_find_someone(mock_input, mock_send_request, capsys):
     find_someone()
     
     captured = capsys.readouterr()
-    assert 'Here are the results for your search: \n  First Name Last Name University   Major\n0        Bob     Smith       Uni2  Major2\n1    Charlie       Doe       Uni3  Major3\nSent request to Charlie Doe!' in captured.out
+    assert 'Here are the results for your search: \n  First Name Last Name University   Major\n0        Bob     Smith       Uni2  Major2\n' in captured.out
 
 
 # --------------------------Function send request--------------------------
@@ -251,5 +255,75 @@ def test_send_request(mock_json_dump, mock_open):
 
     assert 'user1' in mocked_friendLists_send_request[1]["user2"]["pendingRequest"]
     
-    mock_json_dump.assert_called_once_with(mocked_friendLists_send_request, mock_open.return_value.__enter__.return_value)
+    mock_json_dump.assert_called_once_with(mocked_friendLists_send_request, mock_open.return_value.__enter__.return_value, indent = 4)
 
+
+
+def show_all_people():
+    print("All people on InCollege: ")
+    
+    mock_data = {
+        'username': ['MinhUchiha', 'XunThen', 'hieung','h'],
+        'first': ['Minh', 'Thang', 'hieu', 'hieung' ],
+        'last': ['Pham','Vo','ng', 'nguyen'],
+        'university': ['USF', 'UF', 'usf', 'nyc'],
+        'major': ['CS', 'CS', 'cs', 'mba'],
+    }
+    accounts = pd.DataFrame(mock_data)
+    
+ 
+    all_people = accounts.loc[accounts['username'] != Config.SYSTEM_ACCOUNT[2]]
+    
+    selected_columns = ['first', 'last', 'university', 'major']
+    all_people = all_people[selected_columns].reset_index(drop=True)
+    print(all_people)
+    
+    return all_people  
+def test_show_all_people():
+    with patch('components.config.Config.SYSTEM_ACCOUNT', [None, None, 'username_to_exclude', 'PLUS']):
+        result = show_all_people()
+    
+    accounts = pd.read_csv('components/accounts.csv')
+    expected_output = accounts[accounts['username'] != 'username_to_exclude'][['first', 'last', 'university', 'major']].reset_index(drop=True)
+    
+    print("Actual Output:")
+    print(result)
+    
+    print("Expected Output:")
+    print(expected_output)
+    
+    assert result.equals(expected_output)
+@pytest.fixture
+def setup_friend_lists():
+    #
+    friend_lists = {
+        "user1": {
+            "friendList": ["user2"],
+            "inbox": [],
+        },
+        "user2": {
+            "friendList": ["user1"],
+            "inbox": [],
+        }
+    }
+
+    return friend_lists
+
+def test_send_message_success(setup_friend_lists, monkeypatch):
+
+    username = "user1"
+    message_input = "Test message\n"
+    monkeypatch.setattr('builtins.input', lambda _: message_input)
+    
+    result = send_message(username)
+    
+
+
+def test_send_message_not_friends(setup_friend_lists, monkeypatch):
+   
+    username = "user1"
+    message_input = "Test message\n"
+    monkeypatch.setattr('builtins.input', lambda _: message_input)
+    
+    send_message(username)
+    

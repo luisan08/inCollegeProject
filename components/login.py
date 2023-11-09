@@ -21,14 +21,15 @@ def in_InCollege_System():
         print("\nYou are not yet a part of the InCollege system yet.\n")
         return False
 
-def get_first_last_name(username, password):  
+def get_first_last_name_tier(username, password):  
     account_row = accounts[(accounts['username'] == username) & (accounts['password'] == password)]
     if not account_row.empty:
         first_name = account_row['first'].values[0]
         last_name = account_row['last'].values[0]
-        return first_name, last_name
+        tier = account_row['tier'].values[0]
+        return first_name, last_name, tier
     else:
-        return None, None
+        return None, None, None
 
 def login_existing_account():
     """Function for logging into an existing account."""
@@ -37,8 +38,8 @@ def login_existing_account():
         password = input("Please enter your password: ")
         if (username, password) in zip(accounts['username'], accounts['password']):
             print("You have successfully logged in!")
-            first_name, last_name =  get_first_last_name(username, password)
-            Config.SYSTEM_ACCOUNT = (first_name, last_name, username)
+            first_name, last_name, tier =  get_first_last_name_tier(username, password)
+            Config.SYSTEM_ACCOUNT = (first_name, last_name, username, tier)
             Config.FLAG = True
             return False
         else:
@@ -88,15 +89,19 @@ def create_new_account():
     last = input("Please enter your last name: ")
     university = input("Please enter your university: ")
     major = input("Please enter your major: ")
+    tier = input("Please choose an option Standard (free) or Plus ($10/month): ")
+    while tier != "Standard" and tier != "Plus":
+        tier = input("Please choose an option Standard (free) or Plus ($10/month): ")
     friendList = []
     pendingRequest = []
-    newAccount = {'username': username, 'password': password, 'first': first, 'last': last, 'university': university, 'major': major}
+    inbox = []
+    newAccount = {'username': username, 'password': password, 'first': first, 'last': last, 'university': university, 'major': major, 'tier':tier}
     
     newAccount = pd.DataFrame(newAccount, index=[0])
     accounts = pd.concat([accounts, newAccount], ignore_index=True)
     accounts.to_csv('components/accounts.csv', index=False)
     print("You have successfully created an account!")
-    newList = {username: {'friendList': friendList, 'pendingRequest': pendingRequest}}
+    newList = {username: {'friendList': friendList, 'pendingRequest': pendingRequest, 'inbox': inbox}}
     friendLists.append(newList)
     with open('components/friendLists.json', 'w') as f:
         json.dump(friendLists, f, indent=4)

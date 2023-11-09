@@ -15,7 +15,7 @@ def display_groups_of_links():
     print("\n1. Useful Links")
     print("2. InCollege Important Links")
     print("3. Search for Jobs")
-    print("4. Find people you know")
+    print("4. Network")
     print("5. Profile")
     print("6. Sign up/Log in")
     print("7. Exit menu")

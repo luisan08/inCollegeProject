@@ -2,18 +2,25 @@
     {
         "MinhUchiha": {
             "friendList": [
-                "XunThen",
-                "luisa"
+                "luisa",
+                "XunThen"
             ],
-            "pendingRequest": []
+            "pendingRequest": [],
+            "inbox": []
         }
     },
     {
         "XunThen": {
             "friendList": [
-                "MinhUchiha"
+                "MinhUchiha",
+                "hieung"
             ],
-            "pendingRequest": []
+            "pendingRequest": [],
+            "inbox": [
+                {
+                    "hieung": "Hi"
+                }
+            ]
         }
     },
     {
@@ -21,13 +28,31 @@
             "friendList": [
                 "MinhUchiha"
             ],
-            "pendingRequest": []
+            "pendingRequest": [],
+            "inbox": []
         }
     },
     {
         "hieung": {
+            "friendList": [
+                "XunThen"
+            ],
+            "pendingRequest": [],
+            "inbox": [
+                {
+                    "XunThen": "Hello Hieu"
+                },
+                {
+                    "h": "hello hieuuu"
+                }
+            ]
+        }
+    },
+    {
+        "h": {
             "friendList": [],
-            "pendingRequest": []
+            "pendingRequest": [],
+            "inbox": []
         }
     }
 ]
