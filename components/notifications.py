@@ -49,3 +49,16 @@ def notify_applied_jobs(username):
 
 
 
+def deleted_job(username):
+
+    if username in profiles and 'jobDelete_noti' in profiles[username]:
+        deleted_jobs_notifications = profiles[username]['jobDelete_noti']
+
+        for job_id, job_title in deleted_jobs_notifications:
+            print(f"A job that you applied for has been deleted:")
+            print(f"  Job Title: {job_title}")
+          
+
+        # Clear the deleted job notifications
+        profiles[username]['jobDelete_noti'] = []
+
