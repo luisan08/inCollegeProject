@@ -184,7 +184,9 @@ def general_menu():
             login.login()
             if Config.FLAG == True:
                         username = Config.SYSTEM_ACCOUNT[2]
+                        notifications.reminder_jobs(username)
                         notifications.check_and_display_notifications(username)
+                       
         elif choice == 7:
             # Exit menu
             break
