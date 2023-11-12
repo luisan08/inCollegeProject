@@ -186,6 +186,8 @@ def general_menu():
                         username = Config.SYSTEM_ACCOUNT[2]
                         notifications.check_and_display_notifications(username)
                         notifications.reminder_jobs(username)
+                        notifications.message_notif(username)
+                        notifications.new_job(username)
                         notifications.deleted_job(username)
 
         elif choice == 7:

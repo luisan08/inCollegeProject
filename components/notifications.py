@@ -21,6 +21,7 @@ def check_and_display_notifications(username):
     if username not in profiles:
         print("\nDon't forget to create a profile.")
 
+def message_notif(username):
     #message 
     for message in messages:
         if message.get(username):
@@ -55,10 +56,22 @@ def deleted_job(username):
         deleted_jobs_notifications = profiles[username]['jobDelete_noti']
 
         for job_id, job_title in deleted_jobs_notifications:
-            print(f"A job that you applied for has been deleted:")
+            print(f"\nA job that you applied for has been deleted:")
             print(f"  Job Title: {job_title}")
           
+def new_job(username):
 
-        # Clear the deleted job notifications
-        profiles[username]['jobDelete_noti'] = []
+    #addtional check if job is deleted - ??
+
+    if jobs:
+        last_job = jobs[-1]
+        if username not in [applicant['username'] for applicant in last_job['Applicants']]:
+            job_title = last_job['Title']
+            print(f"\nA new job '{job_title}' has been posted.")
+
+
+def new_student(username):
+    pass
+
+
 
