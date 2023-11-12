@@ -183,12 +183,15 @@ def general_menu():
             # Option for login in
             login.login()
             if Config.FLAG == True:
+                        print("\nNotifications!")
+                        print("----------------------------------------------------")
                         username = Config.SYSTEM_ACCOUNT[2]
-                        notifications.check_and_display_notifications(username)
+                        notifications.no_profile_notif(username)
                         notifications.reminder_jobs(username)
                         notifications.message_notif(username)
                         notifications.new_job(username)
                         notifications.deleted_job(username)
+                        notifications.new_student(username)
 
         elif choice == 7:
             # Exit menu

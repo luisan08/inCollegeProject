@@ -9,6 +9,9 @@ from components.config import Config
 accounts = pd.read_csv('components/accounts.csv')
 accounts_controls = pd.read_csv('components/accounts_controls.csv')
 friendLists = json.load(open('components/friendLists.json'))
+notifications = {}
+with open('components/notifications.json', 'r') as f:
+    notifications = json.load(f)
 
 def in_InCollege_System():
     """Function for checking if user is in the InCollege system."""
@@ -69,7 +72,7 @@ def exceeded_login_attempts(attempts = 10):
 
 def create_new_account():
     """Function for creating a new account."""
-    global accounts 
+    global accounts
     global accounts_controls
 
     if exceeded_login_attempts():
@@ -105,6 +108,14 @@ def create_new_account():
     friendLists.append(newList)
     with open('components/friendLists.json', 'w') as f:
         json.dump(friendLists, f, indent=4)
+
+    notifications[username] = {}
+    for userid in notifications:
+        if "student" not in notifications[userid]:
+            notifications[userid]["student"] = []
+        notifications[userid]["student"].append({"first": first, "last": last})
+    with open('components/notifications.json', 'w') as f:
+        json.dump(notifications, f, indent=4)
 
     newAccount_controls = {'language': 'English', 'sms': True, 'email': True, 'advertising': True, 'first': first, 'last': last}
 

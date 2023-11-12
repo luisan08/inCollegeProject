@@ -1,0 +1,55 @@
+{
+    "MinhUchiha": {
+        "deletedJobs": [],
+        "student": []
+    },
+    "XunThen": {
+        "student": [
+            {
+                "first": "Kakashi",
+                "last": "Hakate"
+            }
+        ]
+    },
+    "hieung": {
+        "student": [
+            {
+                "first": "Kakashi",
+                "last": "Hakate"
+            }
+        ]
+    },
+    "h": {
+        "student": [
+            {
+                "first": "Kakashi",
+                "last": "Hakate"
+            }
+        ]
+    },
+    "Minh": {
+        "deletedJobs": [
+            "Machine Learning Engineer"
+        ],
+        "student": []
+    },
+    "NotMinhUchiha": {
+        "deletedJobs": [
+            "Machine Learning Engineer"
+        ],
+        "student": [
+            {
+                "first": "Kakashi",
+                "last": "Hakate"
+            }
+        ]
+    },
+    "Kakashi": {
+        "student": [
+            {
+                "first": "Kakashi",
+                "last": "Hakate"
+            }
+        ]
+    }
+}

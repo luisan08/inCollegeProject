@@ -12,7 +12,15 @@
                 "username": "NotMinhUchiha",
                 "graduation_date": "05/31/2025",
                 "start_working_date": "05/28/2023",
-                "paragraph": "I have experience being a ML Engineer at prestigious companies like Palantir and OpenAI"
+                "paragraph": "I have experience being a ML Engineer at prestigious companies like Palantir and OpenAI",
+                "appliedDate": "11/4/2023"
+            },
+            {
+                "username": "Minh",
+                "graduation_date": "05/31/2025",
+                "start_working_date": "05/28/2023",
+                "paragraph": "I have experience being a ML Engineer at prestigious companies like Palantir and OpenAI",
+                "appliedDate": "11/4/2023"
             }
         ]
     },
@@ -29,7 +37,8 @@
                 "username": "MinhUchiha",
                 "graduation_date": "05/31/2025",
                 "start_working_date": "05/28/2023",
-                "paragraph": "Bla Bla Bla..."
+                "paragraph": "Bla Bla Bla...",
+                "appliedDate": "11/12/2023"
             }
         ]
     },
@@ -41,6 +50,24 @@
         "Employer": "Adobe Firefly",
         "Location": "Lehi, Utah",
         "Salary": "450000",
+        "Applicants": [
+            {
+                "username": "MinhUchiha",
+                "graduation_date": "05/21/2025",
+                "start_working_date": "05/13/2024",
+                "paragraph": "Bla Bla",
+                "appliedDate": "11/12/2023"
+            }
+        ]
+    },
+    {
+        "job_id": 68,
+        "username": "MinhUchiha",
+        "Title": "QA Tester",
+        "Description": "Make tests",
+        "Employer": "Bofa",
+        "Location": "Texas",
+        "Salary": "90000",
         "Applicants": []
     }
 ]
