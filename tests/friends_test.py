@@ -13,6 +13,7 @@ from components.friends import (
     process_request,
     find_someone,
     send_request,
+    show_all_people,
     send_message
     )
 
