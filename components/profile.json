@@ -34,7 +34,10 @@
         "title": "Engineer Student",
         "major": "Computer Science"
     },
-    "Minh": {},
+    "Minh": {
+        "title": "Engineer Student",
+        "major": "Computer Science"
+    },
     "hieung": {
         "SavedJobs": []
     },

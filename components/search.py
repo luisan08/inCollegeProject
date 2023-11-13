@@ -3,6 +3,8 @@ import numpy as np
 import json
 from components.config import Config
 import components.login as login
+import components.notifications as notifications
+from datetime import datetime
 
 accounts = pd.read_csv('components/accounts.csv')
 with open('components/jobs.json', 'r') as f:
@@ -12,16 +14,18 @@ def jobPosting_attempts(attempts = 10):
     return len(jobs) >= attempts
 
 def send_notification(applicants, job_id, job_title):
-    with open('components/profile.json', 'r') as f:
-        profiles = json.load(f)
+    with open('components/notifications.json', 'r') as f:
+        notifications = json.load(f)
+    
     for applicant in applicants:
-        if applicant['username'] in profiles and 'jobDelete_noti' in profiles[Config.SYSTEM_ACCOUNT[2]]:
-            profiles[applicant['username']]['jobDelete_noti'].append((job_id, job_title))
-        else:
-            profiles[applicant['username']] = {}
-            profiles[applicant['username']]['jobDelete_noti'] = [(job_id, job_title)]
-    with open('components/profile.json', 'w') as f:
-        json.dump(profiles, f, indent=4)
+        if applicant["username"] not in notifications:
+            notifications[applicant["username"]] = {"deletedJobs": [], "student": []}
+        if "deletedJobs" not in notifications[applicant["username"]]:
+            notifications[applicant["username"]]["deletedJobs"] = []
+        notifications[applicant["username"]]["deletedJobs"].append(job_title)
+
+    with open('components/notifications.json', 'w') as f:
+        json.dump(notifications, f, indent=4)
     return
 
 def jobSearch():
@@ -88,6 +92,10 @@ def jobSearch():
                         send_notification(job['Applicants'], job['job_id'], job['Title'])
                         print("You have successfully deleted a job!\n")    
                         break
+                
+                # Update the jobs.json file
+                with open('components/jobs.json', 'w') as f:
+                    json.dump(jobs, f, indent=4)
         
         elif option == 3:
             print("Returning to Job Search.")
@@ -132,6 +140,7 @@ def applyJob():
             application['graduation_date'] = input("Enter your graduation date (mm/dd/yyyy): ")
             application['start_working_date'] = input("Enter a day you can start working (mm/dd/yyyy): ")
             application['paragraph'] = input("Enter a paragraph why you are a good fit for this job: ")
+            application["appliedDate"] = datetime.now().strftime("%m/%d/%Y")
             job['Applicants'].append(application)
             print("You have successfully applied for a job!\n")    
             with open('components/jobs.json', 'w') as f:
@@ -289,6 +298,9 @@ def search():
         profiles[Config.SYSTEM_ACCOUNT[2]]['jobDelete_noti'] = []
         with open('components/profile.json', 'w') as f:
             json.dump(profiles, f, indent=4)
+    
+    notifications.notify_applied_jobs(Config.SYSTEM_ACCOUNT[2])
+
 
     while True: #input validation
         print("\nSearch Options:\n1. Post/Delete Jobs\n2. Apply/Save Jobs\n3. Learn a Skill\n4. Quit Search")
