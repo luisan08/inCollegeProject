@@ -1,9 +1,10 @@
 import pandas as pd
 import json
-from unittest.mock import patch, MagicMock, call
+from unittest.mock import patch, mock_open, MagicMock, call
 import builtins
 import io
 import pytest
+import numpy as np
 from components.config import Config
 from components.friends import (
     friends,
@@ -258,20 +259,16 @@ def test_send_request(mock_json_dump, mock_open):
 
 
 def show_all_people(csv_file_path):
-
     csv_data = pd.read_csv(csv_file_path)
-
   
     all_people = csv_data.loc[csv_data['username'] != Config.SYSTEM_ACCOUNT[2]]
-
     
     selected_columns = ['first', 'last', 'university', 'major', 'tier']
     all_people = all_people[selected_columns].reset_index(drop=True)
-
     print("All people on InCollege:")
     print(all_people)
-
     return all_people
+
 def test_show_all_people():
     with patch('components.config.Config.SYSTEM_ACCOUNT', [None, None, 'username_to_exclude', 'PLUS']):
         result = show_all_people('components/accounts.csv')
