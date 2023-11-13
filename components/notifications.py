@@ -39,7 +39,7 @@ def reminder_jobs(username):
                 else: hasApplied = True
 
     if hasApplied:
-        print('Remember – you\'re going to want to have a job when you graduate. Make sure that you start to apply for jobs today!')
+        print('\nRemember – you\'re going to want to have a job when you graduate. Make sure that you start to apply for jobs today!')
 
 
 #notification for job section
@@ -55,8 +55,9 @@ def deleted_job(username):
         notifications = json.load(f)
     
     if username in notifications:
-        for job in notifications[username]["deletedJobs"]:
-            print(f"\nThe job named {job} that you applied for has been deleted.")
+        if "deletedJobs" in notifications[username]:
+            for job in notifications[username]["deletedJobs"]:
+                print(f"\nThe job named {job} that you applied for has been deleted.")
 
 # notification for a new posted job          
 def new_job(username):
@@ -73,7 +74,7 @@ def new_student(username):
     
     if "student" in notifications[username]:
         for newUser in notifications[username]["student"]:
-            print(f"{newUser['first']} {newUser['last']} has joined InCollege.")
+            print(f"\n{newUser['first']} {newUser['last']} has joined InCollege.")
     
         notifications[username]["student"] = []
     
