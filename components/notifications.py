@@ -39,7 +39,7 @@ def reminder_jobs(username):
                 else: hasApplied = True
 
     if hasApplied:
-        print('Remember – you\'re going to want to have a job when you graduate. Make sure that you start to apply for jobs today!')
+        print('\nRemember – you\'re going to want to have a job when you graduate. Make sure that you start to apply for jobs today!')
 
 
 #notification for job section
@@ -74,7 +74,7 @@ def new_student(username):
     
     if "student" in notifications[username]:
         for newUser in notifications[username]["student"]:
-            print(f"{newUser['first']} {newUser['last']} has joined InCollege.")
+            print(f"\n{newUser['first']} {newUser['last']} has joined InCollege.")
     
         notifications[username]["student"] = []
     
