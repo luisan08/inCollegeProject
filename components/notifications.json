@@ -28,15 +28,11 @@
         ]
     },
     "Minh": {
-        "deletedJobs": [
-            "Machine Learning Engineer"
-        ],
+        "deletedJobs": [],
         "student": []
     },
     "NotMinhUchiha": {
-        "deletedJobs": [
-            "Machine Learning Engineer"
-        ],
+        "deletedJobs": [],
         "student": [
             {
                 "first": "Kakashi",
@@ -45,11 +41,6 @@
         ]
     },
     "Kakashi": {
-        "student": [
-            {
-                "first": "Kakashi",
-                "last": "Hakate"
-            }
-        ]
+        "student": []
     }
 }

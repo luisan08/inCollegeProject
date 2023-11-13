@@ -55,8 +55,9 @@ def deleted_job(username):
         notifications = json.load(f)
     
     if username in notifications:
-        for job in notifications[username]["deletedJobs"]:
-            print(f"\nThe job named {job} that you applied for has been deleted.")
+        if "deletedJobs" in notifications[username]:
+            for job in notifications[username]["deletedJobs"]:
+                print(f"\nThe job named {job} that you applied for has been deleted.")
 
 # notification for a new posted job          
 def new_job(username):
