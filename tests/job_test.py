@@ -209,7 +209,7 @@ mock_jobs_5 = [{
         "Employer": "OpenAI",
         "Location": "San Jose, CA",
         "Salary": "500000",
-        "Applicants": [{'username': 'MinhUchiha', 'graduation_date' : '05/31/2025', 'start_working_date' : '05/28/2023', 'paragraph': 'Bla Bla Bla...'}]
+        "Applicants": [{'username': 'MinhUchiha', 'graduation_date' : '05/31/2025', 'start_working_date' : '05/28/2023', 'paragraph': 'Bla Bla Bla...', "appliedDate": "11/4/2023"}]
     }, {
         "job_id": 3,
         "username": "Uchiha",
@@ -253,7 +253,7 @@ mock_jobs_6 = [{
         "Employer": "OpenAI",
         "Location": "San Jose, CA",
         "Salary": "500000",
-        "Applicants": [{'username': 'MinhUchiha', 'graduation_date' : '05/31/2025', 'start_working_date' : '05/28/2023', 'paragraph': 'Bla Bla Bla...'}]
+        "Applicants": [{'username': 'MinhUchiha', 'graduation_date' : '05/31/2025', 'start_working_date' : '05/28/2023', 'paragraph': 'Bla Bla Bla...', "appliedDate": "11/7/2023"}]
     }, {
         "job_id": 3,
         "username": "Uchiha",
@@ -296,7 +296,7 @@ mock_jobs_7 = [{
         "Employer": "OpenAI",
         "Location": "San Jose, CA",
         "Salary": "500000",
-        "Applicants": [{'username': 'MinhUchiha', 'graduation_date' : '05/31/2025', 'start_working_date' : '05/28/2023', 'paragraph': 'Bla Bla Bla...'}]
+        "Applicants": [{'username': 'MinhUchiha', 'graduation_date' : '05/31/2025', 'start_working_date' : '05/28/2023', 'paragraph': 'Bla Bla Bla...', "appliedDate": "11/4/2023"}]
     }, {
         "job_id": 3,
         "username": "Uchiha",
