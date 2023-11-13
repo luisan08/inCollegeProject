@@ -258,33 +258,23 @@ def test_send_request(mock_json_dump, mock_open):
     mock_json_dump.assert_called_once_with(mocked_friendLists_send_request, mock_open.return_value.__enter__.return_value, indent = 4)
 
 
-
-def show_all_people():
-    print("All people on InCollege: ")
+def show_all_people(csv_file_path):
+    csv_data = pd.read_csv(csv_file_path)
+  
+    all_people = csv_data.loc[csv_data['username'] != Config.SYSTEM_ACCOUNT[2]]
     
-    mock_data = {
-        'username': ['MinhUchiha', 'XunThen', 'hieung','h'],
-        'first': ['Minh', 'Thang', 'hieu', 'hieung' ],
-        'last': ['Pham','Vo','ng', 'nguyen'],
-        'university': ['USF', 'UF', 'usf', 'nyc'],
-        'major': ['CS', 'CS', 'cs', 'mba'],
-    }
-    accounts = pd.DataFrame(mock_data)
-    
- 
-    all_people = accounts.loc[accounts['username'] != Config.SYSTEM_ACCOUNT[2]]
-    
-    selected_columns = ['first', 'last', 'university', 'major']
+    selected_columns = ['first', 'last', 'university', 'major', 'tier']
     all_people = all_people[selected_columns].reset_index(drop=True)
+    print("All people on InCollege:")
     print(all_people)
-    
-    return all_people  
+    return all_people
+
 def test_show_all_people():
     with patch('components.config.Config.SYSTEM_ACCOUNT', [None, None, 'username_to_exclude', 'PLUS']):
-        result = show_all_people()
+        result = show_all_people('components/accounts.csv')
     
     accounts = pd.read_csv('components/accounts.csv')
-    expected_output = accounts[accounts['username'] != 'username_to_exclude'][['first', 'last', 'university', 'major']].reset_index(drop=True)
+    expected_output = accounts[accounts['username'] != 'username_to_exclude'][['first', 'last', 'university', 'major', 'tier']].reset_index(drop=True)
     
     print("Actual Output:")
     print(result)
