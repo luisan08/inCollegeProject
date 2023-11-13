@@ -4,6 +4,7 @@ from unittest.mock import patch, MagicMock, call
 import builtins
 import io
 import pytest
+from components.config import Config
 from components.friends import (
     friends,
     disconnect,
@@ -11,7 +12,8 @@ from components.friends import (
     notifications,
     process_request,
     find_someone,
-    send_request
+    send_request,
+    send_message
     )
 
 # --------------------------Function disconnect--------------------------
@@ -253,3 +255,67 @@ def test_send_request(mock_json_dump, mock_open):
     
     mock_json_dump.assert_called_once_with(mocked_friendLists_send_request, mock_open.return_value.__enter__.return_value, indent = 4)
 
+
+def show_all_people(csv_file_path):
+
+    csv_data = pd.read_csv(csv_file_path)
+
+  
+    all_people = csv_data.loc[csv_data['username'] != Config.SYSTEM_ACCOUNT[2]]
+
+    
+    selected_columns = ['first', 'last', 'university', 'major', 'tier']
+    all_people = all_people[selected_columns].reset_index(drop=True)
+
+    print("All people on InCollege:")
+    print(all_people)
+
+    return all_people
+def test_show_all_people():
+    with patch('components.config.Config.SYSTEM_ACCOUNT', [None, None, 'username_to_exclude', 'PLUS']):
+        result = show_all_people('components/accounts.csv')
+    
+    accounts = pd.read_csv('components/accounts.csv')
+    expected_output = accounts[accounts['username'] != 'username_to_exclude'][['first', 'last', 'university', 'major', 'tier']].reset_index(drop=True)
+    
+    print("Actual Output:")
+    print(result)
+    
+    print("Expected Output:")
+    print(expected_output)
+    
+    assert result.equals(expected_output)
+@pytest.fixture
+def setup_friend_lists():
+    #
+    friend_lists = {
+        "user1": {
+            "friendList": ["user2"],
+            "inbox": [],
+        },
+        "user2": {
+            "friendList": ["user1"],
+            "inbox": [],
+        }
+    }
+
+    return friend_lists
+
+def test_send_message_success(setup_friend_lists, monkeypatch):
+
+    username = "user1"
+    message_input = "Test message\n"
+    monkeypatch.setattr('builtins.input', lambda _: message_input)
+    
+    result = send_message(username)
+    
+
+
+def test_send_message_not_friends(setup_friend_lists, monkeypatch):
+   
+    username = "user1"
+    message_input = "Test message\n"
+    monkeypatch.setattr('builtins.input', lambda _: message_input)
+    
+    send_message(username)
+    
